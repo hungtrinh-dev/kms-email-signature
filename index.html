@@ -1,0 +1,622 @@
+<!DOCTYPE html5>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KMS Email Signature</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            font-family: Roboto, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f6f8fa 0%, #e9f5f1 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .page-wrapper {
+            display: flex;
+            flex-direction: row;
+            gap: 40px;
+            align-items: stretch;
+            justify-content: center;
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 40px 24px;
+            min-height: 80vh;
+            animation: fadeIn 0.7s cubic-bezier(.4, 0, .2, 1);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content.column,
+        .display.column {
+            min-height: 520px;
+            flex: 1 1 0;
+        }
+
+        h1 {
+            font-size: 2.4rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            margin-bottom: 0.2em;
+            margin-top: 0.5em;
+            text-align: center;
+            display: block;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #6b7a8f;
+            font-size: 1.1rem;
+            margin-bottom: 1.5em;
+            display: block;
+        }
+
+        @media (max-width: 1024px) {
+            h1 {
+                font-size: 2rem;
+                margin-top: 0.7em;
+                margin-bottom: 0.4em;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+                margin-bottom: 1.2em;
+            }
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.3rem;
+                margin-top: 0.8em;
+                margin-bottom: 0.5em;
+            }
+
+            .subtitle {
+                font-size: 0.98rem;
+                margin-bottom: 1em;
+            }
+        }
+
+        .container {
+            display: none;
+        }
+
+        .main-cards {
+            display: flex;
+            flex-direction: row;
+            gap: 40px;
+            width: 100%;
+            align-items: stretch;
+            justify-content: center;
+        }
+
+        .content.column {
+            max-width: 440px;
+            width: 100%;
+            margin: 0;
+            background: #fff;
+            border-radius: 22px;
+            box-shadow: 0 6px 32px rgba(0, 0, 0, 0.10);
+            padding: 40px 32px 32px 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            border-left: 4px solid #00B549;
+            min-height: 540px;
+            overflow: hidden;
+        }
+
+        .content.column form {
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .content.column .step {
+            font-size: 1.35rem;
+            font-weight: 800;
+            margin-bottom: 28px;
+            color: #222;
+            letter-spacing: -0.5px;
+        }
+
+        form input[type="text"] {
+            width: 100%;
+            max-width: 100%;
+            padding: 14px 16px;
+            border-radius: 10px;
+            border: 1.5px solid #e0e4ea;
+            margin-bottom: 22px;
+            font-size: 1.05rem;
+            background: #f7fafc;
+            transition: border 0.2s, box-shadow 0.2s;
+            word-break: break-word;
+        }
+
+        form input[type="text"]:focus {
+            border: 1.5px solid #00B549;
+            outline: none;
+            box-shadow: 0 0 0 2px #00b54922;
+            background: #fff;
+        }
+
+        #address {
+            display: flex;
+            width: 100%;
+            justify-content: flex-start;
+            align-items: center;
+            margin-bottom: 10px;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        #address label.form-label {
+            margin-bottom: 0;
+            margin-right: 12px;
+        }
+
+        #address label:not(.form-label) {
+            font-weight: 500;
+            font-size: 1rem;
+            margin-right: 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            border-radius: 999px;
+            padding: 6px 18px;
+            border: 1.5px solid #e0e4ea;
+            background: #f7fafc;
+            margin-bottom: 4px;
+            margin-right: 8px;
+            transition: border 0.2s, background 0.2s, color 0.2s;
+        }
+
+        #address input[type="radio"] {
+            accent-color: #00B549;
+            margin-right: 6px;
+            width: 18px;
+            height: 18px;
+        }
+
+        #address input[type="radio"]:checked+span {
+            color: #00B549;
+        }
+
+        #address input[type="radio"]:checked~label:not(.form-label) {
+            border: 1.5px solid #00B549;
+            background: #e6f9f0;
+            color: #00B549;
+        }
+
+        #address label:not(.form-label):hover {
+            border: 1.5px solid #00B549;
+            background: #e6f9f0;
+            color: #00B549;
+        }
+
+        .display.column {
+            background: #fff;
+            border-radius: 22px;
+            box-shadow: 0 6px 32px rgba(0, 0, 0, 0.10);
+            padding: 40px 32px 32px 32px;
+            margin: 0;
+            max-width: 720px;
+            min-width: 320px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-right: 4px solid #00B549;
+            min-height: 540px;
+        }
+
+        .display.column .step {
+            font-size: 1.35rem;
+            font-weight: 800;
+            margin-bottom: 28px;
+            color: #222;
+            letter-spacing: -0.5px;
+            width: 100%;
+            text-align: left;
+        }
+
+        #idisplay {
+            width: 100%;
+            height: max-content;
+            padding: 24px;
+            max-width: 100%;
+            border-radius: 14px;
+            background: #f7fafc;
+            margin-bottom: 24px;
+            border: 1.5px dashed #e0e4ea;
+            transition: box-shadow 0.2s;
+        }
+
+        .btn-copy {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        #copyBtn {
+            background: linear-gradient(90deg, #00B549 0%, #00d97e 100%);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 16px 40px;
+            font-size: 1.08rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        #copyBtn:hover,
+        #copyBtn:focus {
+            background: linear-gradient(90deg, #00a23a 0%, #00d97e 100%);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.10);
+            transform: translateY(-2px) scale(1.03);
+        }
+
+        #copyBtn.copied {
+            background: #00B549;
+            color: #fff;
+            animation: copiedFlash 0.7s;
+        }
+
+        @keyframes copiedFlash {
+            0% {
+                background: #00B549;
+            }
+
+            50% {
+                background: #00d97e;
+            }
+
+            100% {
+                background: #00B549;
+            }
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 4px;
+            font-weight: 500;
+            font-size: 0.98rem;
+        }
+
+        .footer {
+            text-align: center;
+            color: #b0b8c9;
+            font-size: 0.95rem;
+            margin-top: 24px;
+            margin-bottom: 8px;
+            letter-spacing: 0.01em;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+
+        }
+
+        @media (max-width: 1024px) {
+            html, body, .page-wrapper, .main-cards {
+                width: 100%;
+                max-width: 100%;
+                overflow-x: auto;
+            }
+            .content.column, .display.column {
+                max-width: 100%;
+                min-width: unset;
+                padding: 32px 4vw 28px 4vw;
+            }
+            #idisplay {
+                min-width: 0;
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+        @media (max-width: 600px) {
+            html, body {
+                width: 100vw;
+                max-width: 100vw;
+                overflow-x: hidden;
+            }
+            .page-wrapper, .main-cards {
+                flex-direction: column;
+                width: 100vw;
+                max-width: 100vw;
+                gap: 18px;
+                overflow-x: hidden;
+            }
+            .content.column, .display.column {
+                width: 100vw;
+                max-width: 100vw;
+                min-width: 0;
+                padding: 10px 0 10px 0;
+                border-radius: 10px;
+                margin-bottom: 18px;
+                overflow: visible;
+                word-break: break-word;
+                overflow-wrap: anywhere;
+            }
+            form, #idisplay {
+                width: 100vw;
+                max-width: 100vw;
+                min-width: 0;
+            }
+            form input[type="text"], #copyBtn {
+                width: 100%;
+                max-width: 100%;
+                box-sizing: border-box;
+            }
+            .content.column .step, .display.column .step {
+                font-size: 1.08rem;
+                margin-bottom: 18px;
+            }
+            #idisplay {
+                padding: 4px;
+                border-radius: 8px;
+                min-height: unset;
+            }
+            #address label:not(.form-label) {
+                padding: 6px 10px;
+                font-size: 0.98rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+
+            .content.column,
+            .display.column {
+                padding: 6px 1vw 6px 1vw;
+            }
+
+            .footer {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>KMS Email Signature</h1>
+    <div class="subtitle">Generate a beautiful, professional signature for your KMS emails in seconds.</div>
+    <div class="page-wrapper">
+        <div class="main-cards">
+            <div class="content column">
+                <div class="step">Step 1: Update your information</div>
+                <form>
+                    <label for="avatar" class="form-label">Avatar image URL</label>
+                    <input type="text" name="avatar" id="avatar" value="" placeholder="Avatar image URL" />
+                    <label for="name" class="form-label">Full name</label>
+                    <input type="text" name="name" id="name" value="John Doe" placeholder="Full name" />
+                    <label for="title" class="form-label">Your title</label>
+                    <input type="text" name="title" id="title" value="Head of Corporate Communications"
+                        placeholder="Your title" />
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="text" name="email" id="email" value="john.doe@example.com"
+                        placeholder="Email address" />
+                    <label for="mobile" class="form-label">Mobile number</label>
+                    <input type="text" name="mobile" id="mobile" value="(+84) 912 500 325"
+                        placeholder="Mobile number" />
+                    <div id="address">
+                        <label class="form-label" style="margin-bottom:0;">Office: </label>
+                        <label><input type="radio" name="addressId" value="tv" checked /> Tan Vien</label>
+                        <label><input type="radio" name="addressId" value="dn" /> Da Nang</label>
+                        <label><input type="radio" name="addressId" value="us" /> Atlanta</label>
+                        <label><input type="radio" name="addressId" value="mx" /> Mexico</label>
+                    </div>
+                </form>
+            </div>
+            <div class="display column" id="display">
+                <div class="step">Step 2: Copy your email signature</div>
+                <iframe id="idisplay"></iframe>
+                <div class="btn-copy">
+                    <button id="copyBtn">Copy to Clipboard</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">Made with ❤️ by your KMS team</div>
+
+    <script>
+        const LOGO =
+            "https://res.cloudinary.com/hypertal/image/upload/v1752516848/kms/kms-healthcare-logo_ch4fly.png";
+        const ADDRESSES = {
+            tv: {
+                address: "2 Tan Vien St., Tan Son Hoa Ward, HCMC",
+                map: "https://goo.gl/maps/fu6urHDYvu2ff5r1A",
+            },
+            dn: {
+                address:
+                    "5F, VNPT building - 346 2 Thang 9 St., Hoa Cuong Ward, Da Nang",
+                map: "https://goo.gl/maps/cw5asBPhnyxuGaLAA",
+            },
+            us: {
+                address:
+                    "1776 Peachtree Rd NW, Atlanta, GA 30309",
+                map: "https://goo.gl/maps/FVDbkgTt5e8fCQuA6",
+            },
+            mx: {
+                address:
+                    "Parque Tecnológico, 45609 San Pedro Tlaquepaque, Jal",
+                map: "https://goo.gl/maps/DnUBxcbus5RVFxaA6",
+            },
+        };
+
+        const renderHTML = (name, title, email, mobile, address, map, avatar) => {
+            return (
+                `
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>KMS Email Signature</title><meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i&amp;display=swap" rel="stylesheet" />
+    <style type="text/css">body{margin:0;padding:0;font-family:Roboto,sans-serif;background-color:transparent;line-height:normal}a,a:hover,a:active,a:link,a:visited{text-decoration:none !important;color:#424142}#container{margin:0;padding:0}#corp-section{padding:0 5px}#contact-section{border-left:1px solid rgb(217,217,217);padding:0 8px;font-size:9pt;color:rgb(89,89,89);font-family: Roboto, sans-serif}.logo {margin-bottom: 7px;}#contact-name{font-size:11pt;font-family: Roboto, sans-serif;color:#00B549;font-weight:bold;line-height:normal}#contact-title{margin-top:2px;line-height:normal;color:#595959}.contact-sub-info{margin-top:6px; display:flex;}a{text-decoration: none;} .contact-info{line-height:normal;}</style>
+    <style>
+    
+    </style>
+  </head>
+  <body>
+    
+  <table id="container">
+      <td id="corp-section">
+        <div class="logo">
+          <a href="https://kms-healthcare.com/" target="_blank" rel="noopener noreferrer"><img src="${LOGO}" alt="KMS Logo" width="168px"/></a>
+        </div>
+        <table style="width: 100%; border-collapse: collapse; margin: 0 auto;">
+            <tr>
+                <td style="text-align: center; padding: 0 6px;">
+                    <a style="display: inline-block; background-color: #072765; border-radius:50%; padding: 6px; overflow:hidden;width: 18px; height: 18px;" href="https://kms-healthcare.com/" target="_blank"  rel="noopener noreferrer">
+                        <img src="https://res.cloudinary.com/hypertal/image/upload/v1752516485/kms/world-wide-signal-svgrepo-com_kct2iw.png" alt="KMS Healthcare Website" width="18px" height="18px" />
+                    </a>
+                </td>
+                <td style="text-align: center; padding: 0 6px;">
+                    <a style="display: inline-block; background-color: #072765; border-radius:50%; padding: 6px; overflow:hidden;width: 18px; height: 18px;" href="https://kms-healthcare.com/contact/" target="_blank"  rel="noopener noreferrer">
+                        <img src="https://res.cloudinary.com/hypertal/image/upload/v1752516727/kms/message-circle-pencil-svgrepo-com_wuairg.png" alt="KMS Healthcare Chat" width="18px" height="18px" />
+                    </a>
+                </td>
+                <td style="text-align: center; padding: 0 6px;">
+                    <a style="display: inline-block; background-color: #072765; border-radius:50%; padding: 6px; overflow:hidden;width: 18px; height: 18px;" href="https://www.linkedin.com/company/kms-healthcare/" target="_blank"  rel="noopener noreferrer">
+                        <img src="https://res.cloudinary.com/hypertal/image/upload/v1752516727/kms/linkedin-161-svgrepo-com_dibqna.png" alt="KMS Health Linkedin" width="18px" height="18px" />
+                    </a>
+                </td>
+            </tr>
+        </table>
+      </td>
+      <td id="contact-section">
+        <div style="margin-bottom: 8px;">
+          <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+              ${avatar ?
+                    `<td style="width: 80px; vertical-align: middle; padding-right: 15px;">
+                        <div style="width:80px;height:80px;overflow:hidden;border-radius:50%;display:inline-block;">
+                            <img src="${avatar}" alt="Avatar" width="80" height="80" style="display:block; border-radius:50%;" />
+                        </div>
+                    
+                </td>`
+                    : ""
+                }    
+              <td style="vertical-align: middle;">
+                <p id="contact-name" style="font-size:24px;font-weight:bold; white-space:nowrap; margin: 0;">${name}</p>
+                <p id="contact-title" class="contact-tile-color" style="font-size:14px;font-weight:bold;margin:0;margin-top:2px;white-space:nowrap;">${title}</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div style="margin-top:20px"">
+            <div class="contact-info contact-sub-info">
+                <img src="https://res.cloudinary.com/hypertal/image/upload/v1752517405/kms/email-svgrepo-com_v26lpf.png" alt="Email" width="16px" height="16px" style="margin-right: 8px;"/>
+                <a style="text-decoration: none" href="mailto:${email.trim()}">${email.trim()}</a>
+            </div>
+            <div class="contact-info contact-sub-info">
+                <img src="https://res.cloudinary.com/hypertal/image/upload/v1752517405/kms/phone-call-svgrepo-com_1_y6mtln.png" alt="Mobile phone" width="16px" height="16px" style="margin-right: 8px;"/>
+                <a style="text-decoration: none" href="tel:${mobile.trim().replace(/[ ()]/g, '')}">${mobile}</a>
+            </div>
+            <div class="contact-info contact-sub-info">
+                <img src="https://res.cloudinary.com/hypertal/image/upload/v1752517405/kms/google-chat-svgrepo-com_qz4hxk.png" alt="Google Chat" width="16px" height="16px" style="margin-right: 8px;"/>
+                <a style="text-decoration: none" href="https://chat.google.com/hungtrinh@kms-technology.com" target="_blank" rel="noopener noreferrer">Find me via GoogleChat</a>
+            </div>
+            <div class="contact-info contact-sub-info">
+                <img src="https://res.cloudinary.com/hypertal/image/upload/v1752517405/kms/address-location-map-svgrepo-com_qlb93x.png" alt="Address" width="16px" height="16px" style="margin-right: 8px;"/>
+                <a style="text-decoration: none" href="${map}" target="_blank" rel="noopener noreferrer">${address}</a>
+            </div>
+        </div>
+       
+      </td>
+    </tr>
+  </table>
+  </body>
+  </html>
+  `);
+        };
+
+        const handleChange = () => {
+            const avatar = document.getElementById("avatar").value || "";
+            const name = document.getElementById("name").value || "[add your name]";
+            const title =
+                document.getElementById("title").value || "[add your title]";
+            const email = document.getElementById("email").value || "";
+            const mobile =
+                document.getElementById("mobile").value || "[add your mobile number]";
+            const addressId = document.querySelector(
+                'input[name="addressId"]:checked'
+            ).value;
+
+
+            const addr = ADDRESSES[addressId];
+
+            const address = addr ? addr.address : "[select your office]";
+            const map = addr ? addr.map : "N/A";
+
+            const value = renderHTML(name, title, email, mobile, address, map, avatar);
+
+            const rootIframe = document.getElementById("idisplay");
+            rootIframe.srcdoc = value.trim();
+        };
+
+        const handleCopy = () => {
+            const icontent = document.getElementById("idisplay").contentDocument;
+            let message =
+                "Something was wrong. Your signature couldn't copy to the clipboard. Please do it manually by the keyboard.";
+
+            let ok = icontent.execCommand("selectAll");
+            if (ok) {
+                ok = icontent.execCommand("copy");
+                if (ok) {
+                    message =
+                        "Your signature is successully copied into the clipboard.";
+                }
+            }
+            alert(message);
+        };
+
+        // Event listener registration
+        document.addEventListener("DOMContentLoaded", handleChange);
+
+        document
+            .querySelectorAll(
+                "#name, #title, #email, #mobile, #avatar, #googlechatId, input[name='addressId'], input[name='logo']"
+            )
+            .forEach((e) => e.addEventListener("input", handleChange));
+
+        document.getElementById("copyBtn").addEventListener("click", handleCopy);
+
+        // Add feedback animation for copy button
+        const copyBtn = document.getElementById("copyBtn");
+        if (copyBtn) {
+            copyBtn.addEventListener("click", function () {
+                copyBtn.classList.remove("copied");
+                void copyBtn.offsetWidth; // trigger reflow
+                copyBtn.classList.add("copied");
+                setTimeout(() => copyBtn.classList.remove("copied"), 700);
+            });
+        }
+    </script>
+</body>
+
+</html>
