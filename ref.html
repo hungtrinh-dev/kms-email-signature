@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KMS Email Signature</title>
+    <style>
+      body {
+        font-family: Roboto, sans-serif;
+      }
+
+      input {
+        margin: 5px 0 10px 0;
+      }
+
+      input[type="text"] {
+        width: 90%;
+        padding: 5px;
+        border-radius: 4px;
+        border: 1px solid #a8a8a8;
+      }
+
+      iframe {
+        width: 100%;
+        height: 85%;
+        border: 1px dashed #a8a8a8;
+        margin: 5px;
+      }
+
+      .container {
+        display: flex;
+        width: 90%;
+        justify-content: center;
+        justify-items: center;
+      }
+
+      .display {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .step {
+        font-size: medium;
+        font-weight: bold;
+      }
+
+      .column {
+        flex: 1;
+      }
+
+      #address {
+        display: flex;
+        width: 90%;
+        justify-content: space-between;
+        align-items: baseline;
+      }
+
+      .btn-copy {
+        text-align: center;
+        margin-top: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>KMS Email Signature</h1>
+    <div class="container">
+      <div class="content column">
+        <div class="step">Step 1: Update your information</div>
+        <form>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            value="Duy Tran (Dominic)"
+            placeholder="Full name"
+          />
+          <input
+            type="text"
+            name="title"
+            id="title"
+            value="Head of Corporate Communications"
+            placeholder="Your title"
+          />
+          <input
+            type="text"
+            name="mobile"
+            id="mobile"
+            value="(+84) 912 500 325"
+            placeholder="Mobile number"
+          />
+          <div id="address">
+            <label>Office: </label>
+            <label
+              ><input type="radio" name="addressId" value="tv" checked /> Tan
+              Vien</label
+            >
+            <label
+              ><input type="radio" name="addressId" value="dn" /> Da Nang</label
+            >
+            <label
+              ><input type="radio" name="addressId" value="us" /> Atlanta</label
+            >
+            <label
+              ><input type="radio" name="addressId" value="mx" /> Mexico</label
+            >
+          </div>
+        </form>
+      </div>
+      <div class="display column" id="display">
+        <div class="step">Step 2: Copy your email signature</div>
+        <iframe id="idisplay"></iframe>
+        <div class="btn-copy">
+          <button id="copyBtn">Copy to Clipboard</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const LOGO =
+        "https://mcusercontent.com/62e4cc60e0bf7e4a8a1a3c2ae/images/e4d82671-8fc8-47a1-811b-844902d89b7e.png";
+      const ICON_WEB =
+        "https://mcusercontent.com/62e4cc60e0bf7e4a8a1a3c2ae/images/d0474e47-0e77-4539-8302-ca312003e627.png";
+      const ICON_FB =
+        "https://mcusercontent.com/62e4cc60e0bf7e4a8a1a3c2ae/images/d2b6f3f6-f400-405a-8fb2-af20584ca597.png";
+      const INCON_LINKEDIN =
+        "https://mcusercontent.com/62e4cc60e0bf7e4a8a1a3c2ae/images/4f5b1ecd-eb97-4f62-98bb-9e99503b6c1f.png";
+
+      const ADDRESSES = {
+        tv: {
+          address: "2 Tan Vien St., Tan Son Hoa Ward, HCMC",
+          map: "https://goo.gl/maps/fu6urHDYvu2ff5r1A",
+        },
+        dn: {
+          address:
+            "5F, VNPT building - 346 2 Thang 9 St., Hoa Cuong Ward, Da Nang",
+          map: "https://goo.gl/maps/cw5asBPhnyxuGaLAA",
+        },
+        us: {
+          address:
+            "1776 Peachtree Rd NW, Atlanta, GA 30309",
+          map: "https://goo.gl/maps/FVDbkgTt5e8fCQuA6",
+        },
+        mx: {
+          address:
+            "Parque Tecnológico, 45609 San Pedro Tlaquepaque, Jal",
+          map: "https://goo.gl/maps/DnUBxcbus5RVFxaA6",
+        },
+      };
+
+      const renderHTML = (name, title, mobile, address, map) => {
+        return (
+  `
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>KMS Email Signature</title><meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i&amp;display=swap" rel="stylesheet" />
+    <style type="text/css">body{margin:0;padding:0;font-family:Roboto,sans-serif;background-color:transparent;line-height:normal}a,a:hover,a:active,a:link,a:visited{text-decoration:none !important;color:#424142}#container{margin:0;padding:0}#corp-section{padding:0 5px}#contact-section{border-left:1px solid rgb(217,217,217);padding:0 5px;font-size:9pt;color:rgb(89,89,89);font-family: Roboto, sans-serif}.logo {margin-bottom: 7px;}#contact-name{font-size:11pt;font-family: Roboto, sans-serif;color:rgb(39,170,225);font-weight:bold;line-height:normal}#contact-title{padding-bottom:24px;margin-top:2px;line-height:normal}.contact-sub-info{margin-top:2px}a{text-decoration: none;}.contact-info{line-height:normal}</style>
+  </head>
+  <body>
+    
+  <table id="container">
+    <tr>
+      <td id="corp-section">
+        <div class="logo">
+          <a href="https://www.kms-technology.com/" target="_blank" rel="noopener noreferrer"><img src="${LOGO}" alt="KMS Technology" width="113" height="53"/></a>
+        </div>
+        <div class="links">
+          <a href="https://www.kms-technology.com/" target="_blank" rel="noopener noreferrer" class="contact-icon"><img src="${ICON_WEB}" alt="w" width="31" height="31"></a>
+          <a href="https://www.facebook.com/kmstechnologyvietnam" target="_blank" rel="noopener noreferrer" class="contact-icon" style="margin:0 6px"><img src="${ICON_FB}" alt="f" width="31" height="31"></a>
+          <a href="https://www.linkedin.com/company/kms-technology" target="_blank" rel="noopener noreferrer" class="contact-icon"><img src="${INCON_LINKEDIN}" alt="in" width="31" height="31"></a>
+        </div>
+      </td>
+      <td id="contact-section">
+        <div id="contact-name">${name}</div>
+        <div id="contact-title">${title}</div>
+        <div class="contact-info">
+          \u25BA Mobile: <a style="text-decoration: none" href="tel:${mobile.trim().replace(/[ ()]/g, '')}">${mobile}</a>
+        </div>
+        <div class="contact-info contact-sub-info">
+          \u25BA Address: <a style="text-decoration: none" href="${map}" target="_blank" rel="noopener noreferrer">${address}</a>
+        </div>
+      </td>
+    </tr>
+  </table>
+  </body>
+  </html>
+  `);
+      };
+
+      const handleChange = () => {
+        const name = document.getElementById("name").value || "[add your name]";
+        const title =
+          document.getElementById("title").value || "[add your title]";
+        const mobile =
+          document.getElementById("mobile").value || "[add your mobile number]";
+        const addressId = document.querySelector(
+          'input[name="addressId"]:checked'
+        ).value;
+
+        const addr = ADDRESSES[addressId];
+
+        const address = addr ? addr.address : "[select your office]";
+        const map = addr ? addr.map : "N/A";
+
+        const value = renderHTML(name, title, mobile, address, map);
+
+        const rootIframe = document.getElementById("idisplay");
+        rootIframe.srcdoc = value.trim();
+      };
+
+      const handleCopy = () => {
+        const icontent = document.getElementById("idisplay").contentDocument;
+        let message =
+          "Something was wrong. Your signature couldn't copy to the clipboard. Please do it manually by the keyboard.";
+
+        let ok = icontent.execCommand("selectAll");
+        if (ok) {
+          ok = icontent.execCommand("copy");
+          if (ok) {
+            message =
+              "Your signature is successully copied into the clipboard.";
+          }
+        }
+        alert(message);
+      };
+
+      // Event listener registration
+      document.addEventListener("DOMContentLoaded", handleChange);
+
+      document
+        .querySelectorAll(
+          "#name, #title, #mobile, #googlechatId, input[name='addressId']"
+        )
+        .forEach((e) => e.addEventListener("input", handleChange));
+
+      document.getElementById("copyBtn").addEventListener("click", handleCopy);
+    </script>
+  </body>
+</html>

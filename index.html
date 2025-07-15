@@ -412,15 +412,15 @@
                     <label for="avatar" class="form-label">Avatar image URL</label>
                     <input type="text" name="avatar" id="avatar" value="" placeholder="Avatar image URL" />
                     <label for="name" class="form-label">Full name</label>
-                    <input type="text" name="name" id="name" value="John Doe" placeholder="Full name" />
+                    <input type="text" name="name" id="name" value="" placeholder="Full name" />
                     <label for="title" class="form-label">Your title</label>
-                    <input type="text" name="title" id="title" value="Head of Corporate Communications"
-                        placeholder="Your title" />
+                    <input type="text" name="title" id="title" value=""
+                        placeholder="Title" />
                     <label for="email" class="form-label">Email address</label>
-                    <input type="text" name="email" id="email" value="john.doe@example.com"
+                    <input type="text" name="email" id="email" value=""
                         placeholder="Email address" />
                     <label for="mobile" class="form-label">Mobile number</label>
-                    <input type="text" name="mobile" id="mobile" value="(+84) 912 500 325"
+                    <input type="text" name="mobile" id="mobile" value=""
                         placeholder="Mobile number" />
                     <div id="address">
                         <label class="form-label" style="margin-bottom:0;">Office: </label>
@@ -444,7 +444,7 @@
 
     <script>
         const LOGO =
-            "https://res.cloudinary.com/hypertal/image/upload/v1752516848/kms/kms-healthcare-logo_ch4fly.png";
+            "https://res.cloudinary.com/hypertal/image/upload/v1752516849/kms/kms-technology-logo_ry3kno.png";
         const ADDRESSES = {
             tv: {
                 address: "2 Tan Vien St., Tan Son Hoa Ward, HCMC",
@@ -486,22 +486,22 @@
   <table id="container">
       <td id="corp-section">
         <div class="logo">
-          <a href="https://kms-healthcare.com/" target="_blank" rel="noopener noreferrer"><img src="${LOGO}" alt="KMS Logo" width="168px"/></a>
+          <a href="https://kms-technology.com/" target="_blank" rel="noopener noreferrer"><img src="${LOGO}" alt="KMS Logo" width="168px"/></a>
         </div>
         <table style="width: 100%; border-collapse: collapse; margin: 0 auto;">
             <tr>
                 <td style="text-align: center; padding: 0 6px;">
-                    <a style="display: inline-block; background-color: #072765; border-radius:50%; padding: 6px; overflow:hidden;width: 18px; height: 18px;" href="https://kms-healthcare.com/" target="_blank"  rel="noopener noreferrer">
+                    <a style="display: inline-block; background-color: #072765; border-radius:50%; padding: 6px; overflow:hidden;width: 18px; height: 18px;" href="https://kms-technology.com/" target="_blank"  rel="noopener noreferrer">
                         <img src="https://res.cloudinary.com/hypertal/image/upload/v1752516485/kms/world-wide-signal-svgrepo-com_kct2iw.png" alt="KMS Healthcare Website" width="18px" height="18px" />
                     </a>
                 </td>
                 <td style="text-align: center; padding: 0 6px;">
-                    <a style="display: inline-block; background-color: #072765; border-radius:50%; padding: 6px; overflow:hidden;width: 18px; height: 18px;" href="https://kms-healthcare.com/contact/" target="_blank"  rel="noopener noreferrer">
-                        <img src="https://res.cloudinary.com/hypertal/image/upload/v1752516727/kms/message-circle-pencil-svgrepo-com_wuairg.png" alt="KMS Healthcare Chat" width="18px" height="18px" />
+                    <a style="display: inline-block; background-color: #072765; border-radius:50%; padding: 6px; overflow:hidden;width: 18px; height: 18px;" href="https://www.facebook.com/kmstechnologyvietnam/" target="_blank"  rel="noopener noreferrer">
+                        <img src="https://res.cloudinary.com/hypertal/image/upload/v1752546589/kms/facebook-176-svgrepo-com_molvqm.png" alt="KMS Healthcare Chat" width="18px" height="18px" />
                     </a>
                 </td>
                 <td style="text-align: center; padding: 0 6px;">
-                    <a style="display: inline-block; background-color: #072765; border-radius:50%; padding: 6px; overflow:hidden;width: 18px; height: 18px;" href="https://www.linkedin.com/company/kms-healthcare/" target="_blank"  rel="noopener noreferrer">
+                    <a style="display: inline-block; background-color: #072765; border-radius:50%; padding: 6px; overflow:hidden;width: 18px; height: 18px;" href="https://www.linkedin.com/company/kms-technology" target="_blank"  rel="noopener noreferrer">
                         <img src="https://res.cloudinary.com/hypertal/image/upload/v1752516727/kms/linkedin-161-svgrepo-com_dibqna.png" alt="KMS Health Linkedin" width="18px" height="18px" />
                     </a>
                 </td>
@@ -560,7 +560,7 @@
             const name = document.getElementById("name").value || "[add your name]";
             const title =
                 document.getElementById("title").value || "[add your title]";
-            const email = document.getElementById("email").value || "";
+            const email = document.getElementById("email").value || "[add your email]";
             const mobile =
                 document.getElementById("mobile").value || "[add your mobile number]";
             const addressId = document.querySelector(
