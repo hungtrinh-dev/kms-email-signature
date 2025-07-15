@@ -431,8 +431,6 @@
             <div class="content column">
                 <div class="step">Step 1: Update your information</div>
                 <form>
-                    <label for="avatar" class="form-label">Avatar image URL</label>
-                    <input type="text" name="avatar" id="avatar" value="" placeholder="Avatar image URL" />
                     <label for="name" class="form-label">Full name</label>
                     <input type="text" name="name" id="name" value="" placeholder="Full name" />
                     <label for="title" class="form-label">Your title</label>
@@ -441,6 +439,8 @@
                     <input type="text" name="email" id="email" value="" placeholder="Email address" />
                     <label for="mobile" class="form-label">Mobile number</label>
                     <input type="text" name="mobile" id="mobile" value="" placeholder="Mobile number" />
+                    <label for="avatar" class="form-label">Avatar image URL (Optional)</label>
+                    <input type="text" name="avatar" id="avatar" value="" placeholder="Avatar image URL" />
                     <div id="address">
                         <label class="form-label" style="margin-bottom:0;">Office: </label>
                         <label><input type="radio" name="addressId" value="tv" checked /> Tan Vien</label>
@@ -542,8 +542,8 @@
                     : ""
                 }    
               <td style="vertical-align: middle;">
-                <p id="contact-name" style="font-weight:bold; white-space:nowrap; margin: 0;">${name}</p>
-                <p id="contact-title" class="contact-tile-color" style="font-weight:bold;margin:0;margin-top:2px;white-space:nowrap;">${title}</p>
+                <p id="contact-name" style="font-weight:bold; white-space:nowrap; margin: 0; font-size: 14px;">${name}</p>
+                <p id="contact-title" class="contact-tile-color" style="font-weight:bold;margin:0;margin-top:2px;white-space:nowrap; font-size: 14px;">${title}</p>
               </td>
             </tr>
           </table>
@@ -556,10 +556,6 @@
             <div class="contact-info contact-sub-info">
                 <img src="https://res.cloudinary.com/hypertal/image/upload/v1752517405/kms/phone-call-svgrepo-com_1_y6mtln.png" alt="Mobile phone" width="16px" height="16px" style="margin-right: 8px;"/>
                 <a style="text-decoration: none" href="tel:${mobile.trim().replace(/[ ()]/g, '')}">${mobile}</a>
-            </div>
-            <div class="contact-info contact-sub-info">
-                <img src="https://res.cloudinary.com/hypertal/image/upload/v1752517405/kms/google-chat-svgrepo-com_qz4hxk.png" alt="Google Chat" width="16px" height="16px" style="margin-right: 8px;"/>
-                <a style="text-decoration: none" href="https://chat.google.com/hungtrinh@kms-technology.com" target="_blank" rel="noopener noreferrer">Find me via GoogleChat</a>
             </div>
             <div class="contact-info contact-sub-info">
                 <img src="https://res.cloudinary.com/hypertal/image/upload/v1752517405/kms/address-location-map-svgrepo-com_qlb93x.png" alt="Address" width="16px" height="16px" style="margin-right: 8px;"/>
