@@ -123,7 +123,7 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
-            border-left: 4px solid #00B549;
+            border-left: 4px solid #27aae1;
             min-height: 540px;
             overflow: hidden;
         }
@@ -155,7 +155,7 @@
         }
 
         form input[type="text"]:focus {
-            border: 1.5px solid #00B549;
+            border: 1.5px solid #27aae1;
             outline: none;
             box-shadow: 0 0 0 2px #00b54922;
             background: #fff;
@@ -193,26 +193,26 @@
         }
 
         #address input[type="radio"] {
-            accent-color: #00B549;
+            accent-color: #27aae1;
             margin-right: 6px;
             width: 18px;
             height: 18px;
         }
 
         #address input[type="radio"]:checked+span {
-            color: #00B549;
+            color: #27aae1;
         }
 
         #address input[type="radio"]:checked~label:not(.form-label) {
-            border: 1.5px solid #00B549;
+            border: 1.5px solid #27aae1;
             background: #e6f9f0;
-            color: #00B549;
+            color: #27aae1;
         }
 
         #address label:not(.form-label):hover {
-            border: 1.5px solid #00B549;
+            border: 1.5px solid #27aae1;
             background: #e6f9f0;
-            color: #00B549;
+            color: #27aae1;
         }
 
         .display.column {
@@ -226,7 +226,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            border-right: 4px solid #00B549;
+            border-right: 4px solid #27aae1;
             min-height: 540px;
         }
 
@@ -259,7 +259,7 @@
         }
 
         #copyBtn {
-            background: linear-gradient(90deg, #00B549 0%, #00d97e 100%);
+            background: linear-gradient(90deg, #27aae1 0%, #27aae1 100%);
             color: #fff;
             border: none;
             border-radius: 10px;
@@ -273,28 +273,28 @@
 
         #copyBtn:hover,
         #copyBtn:focus {
-            background: linear-gradient(90deg, #00a23a 0%, #00d97e 100%);
+            background: linear-gradient(90deg, #27aae1 0%, #21b2f0 100%);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.10);
             transform: translateY(-2px) scale(1.03);
         }
 
         #copyBtn.copied {
-            background: #00B549;
+            background: #27aae1;
             color: #fff;
             animation: copiedFlash 0.7s;
         }
 
         @keyframes copiedFlash {
             0% {
-                background: #00B549;
+                background: #27aae1;
             }
 
             50% {
-                background: #00d97e;
+                background: #86c2dc;
             }
 
             100% {
-                background: #00B549;
+                background: #27aae1;
             }
         }
 
@@ -502,7 +502,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>KMS Email Signature</title><meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i&amp;display=swap" rel="stylesheet" />
-    <style type="text/css">body{margin:0;padding:0;font-family:Roboto,sans-serif;background-color:transparent;line-height:normal}a,a:hover,a:active,a:link,a:visited{text-decoration:none !important;color:#424142}#container{margin:0;padding:0}#corp-section{padding:0 5px}#contact-section{border-left:1px solid rgb(217,217,217);padding:0 8px;font-size:9pt;color:rgb(89,89,89);font-family: Roboto, sans-serif}.logo {margin-bottom: 7px;}#contact-name{font-size:11pt;font-family: Roboto, sans-serif;color:#00B549;font-weight:bold;line-height:normal}#contact-title{margin-top:2px;line-height:normal;color:#595959}.contact-sub-info{margin-top:6px; display:flex;}a{text-decoration: none;} .contact-info{line-height:normal;}</style>
+    <style type="text/css">body{margin:0;padding:0;font-family:Roboto,sans-serif;background-color:transparent;line-height:normal}a,a:hover,a:active,a:link,a:visited{text-decoration:none !important;color:#424142}#container{margin:0;padding:0}#corp-section{padding:0 12px}#contact-section{border-left:1px solid rgb(217,217,217);padding:0 12px;font-size:9pt;color:rgb(89,89,89);font-family: Roboto, sans-serif}.logo {margin-bottom: 7px;}#contact-name{font-size:11pt;font-family: Roboto, sans-serif;color:#27aae1;font-weight:bold;line-height:normal}#contact-title{margin-top:2px;line-height:normal;color:#595959}.contact-sub-info{margin-top:6px; display:flex;}a{text-decoration: none;} .contact-info{line-height:normal;}</style>
     <style>
     
     </style>
@@ -542,8 +542,8 @@
                     : ""
                 }    
               <td style="vertical-align: middle;">
-                <p id="contact-name" style="font-size:24px;font-weight:bold; white-space:nowrap; margin: 0;">${name}</p>
-                <p id="contact-title" class="contact-tile-color" style="font-size:14px;font-weight:bold;margin:0;margin-top:2px;white-space:nowrap;">${title}</p>
+                <p id="contact-name" style="font-weight:bold; white-space:nowrap; margin: 0;">${name}</p>
+                <p id="contact-title" class="contact-tile-color" style="font-weight:bold;margin:0;margin-top:2px;white-space:nowrap;">${title}</p>
               </td>
             </tr>
           </table>
