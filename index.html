@@ -1025,6 +1025,7 @@
     </div>
     <div class="footer">Made with ❤️ by your KMS team</div>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         const LOGO =
             "https://mcusercontent.com/62e4cc60e0bf7e4a8a1a3c2ae/images/e4d82671-8fc8-47a1-811b-844902d89b7e.png";
@@ -1386,11 +1387,23 @@
             if (ok) {
                 ok = icontent.execCommand("copy");
                 if (ok) {
-                    message =
-                        "Your signature is successully copied into the clipboard.";
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Copied!',
+                        text: 'Your signature is successfully copied into the clipboard.',
+                        timer: 1800,
+                        showConfirmButton: false
+                    });
+                    return;
                 }
             }
-            alert(message);
+            Swal.fire({
+                icon: 'error',
+                title: 'Copy failed',
+                text: message,
+                timer: 2500,
+                showConfirmButton: false
+            });
         };
 
         // Enhanced form validation and UX
