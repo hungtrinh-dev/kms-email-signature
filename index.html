@@ -921,6 +921,14 @@
             transform: translateY(0);
             pointer-events: auto;
         }
+        /* Add CSS for fade transition on iframe */
+        #idisplay {
+            transition: opacity 0.25s cubic-bezier(.4,0,.2,1);
+            opacity: 1;
+        }
+        #idisplay.fading {
+            opacity: 0.3;
+        }
     </style>
 </head>
 
@@ -1502,12 +1510,50 @@
             }
         };
 
+        // Debounce utility
+        function debounce(func, wait) {
+            let timeout;
+            return function(...args) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), wait);
+            };
+        }
+
+        // Debounced preview update with fade
+        const updatePreview = debounce(() => {
+            const rootIframe = document.getElementById("idisplay");
+            rootIframe.classList.add('fading');
+            setTimeout(() => {
+                // Re-run handleChange to get the latest HTML
+                const name = document.getElementById("name").value || "[add your name]";
+                const title = document.getElementById("title").value || "[add your title]";
+                const email = document.getElementById("email").value || "[add your email]";
+                const mobile = document.getElementById("mobile").value || "[add your mobile number]";
+                const addressId = document.querySelector('input[name="addressId"]:checked').value;
+                let avatar = "";
+                const avatarType = document.querySelector('input[name="avatarType"]:checked').value;
+                if (avatarType === "url") {
+                    avatar = document.getElementById("avatar").value || "";
+                } else if (avatarType === "file") {
+                    avatar = window._uploadedImageBase64 || "";
+                }
+                const addr = ADDRESSES[addressId];
+                const address = addr ? addr.address : "[select your office]";
+                const map = addr ? addr.map : "N/A";
+                const value = renderHTML(name, title, email, mobile, address, map, avatar);
+                rootIframe.srcdoc = value.trim();
+                setTimeout(() => {
+                    rootIframe.classList.remove('fading');
+                }, 120);
+            }, 120);
+        }, 500);
+
         // Add input validation listeners for text inputs
         // (replace previous input event logic for text inputs)
         document.querySelectorAll('input[type="text"]').forEach(input => {
             input.addEventListener('input', () => {
                 validateField(input);
-                handleChange();
+                updatePreview();
                 updateRemoveButtonVisibility();
             });
             input.addEventListener('blur', () => validateField(input));
@@ -1517,7 +1563,7 @@
             .querySelectorAll("input[name='addressId'], input[name='logo'], input[name='avatarType']")
             .forEach((e) => {
                 e.addEventListener("input", () => {
-                    handleChange();
+                    updatePreview();
                     updateRemoveButtonVisibility();
                 });
             });
