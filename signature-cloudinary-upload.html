@@ -527,7 +527,7 @@
         }
 
         #address label.form-label {
-            margin-bottom: 10px;
+            margin-bottom: 0;
             margin-right: 12px;
         }
 
@@ -542,7 +542,7 @@
             padding: 6px 18px;
             border: 1.5px solid #e0e4ea;
             background: #f7fafc;
-            margin-bottom: 10px;
+            margin-bottom: 4px;
             margin-right: 8px;
             transition: border 0.2s, background 0.2s, color 0.2s;
         }
@@ -784,123 +784,6 @@
                 font-size: 0.85rem;
             }
         }
-
-        /* Modern Office Radio Buttons */
-        #address .office-radio-group {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px 24px;
-            margin-bottom: 8px;
-        }
-
-        #address .office-radio {
-            display: flex;
-            align-items: center;
-            background: #f7fafc;
-            border: 2px solid #e0e4ea;
-            border-radius: 999px;
-            padding: 12px 28px 12px 16px;
-            font-size: 1.13rem;
-            font-weight: 500;
-            color: #222;
-            cursor: pointer;
-            transition: border 0.2s, background 0.2s, color 0.2s, box-shadow 0.2s;
-            position: relative;
-            box-shadow: 0 2px 8px rgba(39, 170, 225, 0.04);
-            margin-bottom: 0;
-            margin-right: 0;
-            user-select: none;
-        }
-
-        #address .office-radio input[type="radio"] {
-            appearance: none;
-            -webkit-appearance: none;
-            width: 22px;
-            height: 22px;
-            border: 2px solid #b0b8c9;
-            border-radius: 50%;
-            margin-right: 12px;
-            outline: none;
-            background: #fff;
-            transition: border 0.2s, box-shadow 0.2s;
-            position: relative;
-            box-shadow: 0 1px 4px rgba(39, 170, 225, 0.04);
-            flex-shrink: 0;
-        }
-
-        #address .office-radio input[type="radio"]:checked {
-            border: 6px solid #27aae1;
-            background: #fff;
-        }
-
-        #address .office-radio input[type="radio"]:checked::before {
-            content: '';
-            display: block;
-            width: 10px;
-            height: 10px;
-            background: #27aae1;
-            border-radius: 50%;
-            position: absolute;
-            left: 6px;
-            top: 6px;
-        }
-
-        #address .office-radio input[type="radio"]:focus {
-            border-color: #27aae1;
-            box-shadow: 0 0 0 2px #27aae133;
-        }
-
-        #address .office-radio input[type="radio"]:hover {
-            border-color: #27aae1;
-        }
-
-        #address .office-radio input[type="radio"]:active {
-            border-color: #21b2f0;
-        }
-
-        #address .office-radio input[type="radio"]:disabled {
-            border-color: #e0e4ea;
-            background: #f7fafc;
-            cursor: not-allowed;
-        }
-
-        #address .office-radio input[type="radio"]:checked+span {
-            color: #27aae1;
-            font-weight: 700;
-        }
-
-        #address .office-radio input[type="radio"]:not(:checked)+span {
-            color: #222;
-            font-weight: 500;
-        }
-
-        #address .office-radio:has(input[type="radio"]:checked) {
-            border-color: #27aae1;
-            background: #e6f9f0;
-            color: #27aae1;
-            box-shadow: 0 4px 16px rgba(39, 170, 225, 0.10);
-        }
-
-        #address .office-radio:has(input[type="radio"]:checked):hover {
-            background: #d0f3ff;
-        }
-
-        #address .office-radio:hover {
-            border-color: #27aae1;
-            background: #f0f9ff;
-        }
-
-        @media (max-width: 600px) {
-            #address .office-radio-group {
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
-
-            #address .office-radio {
-                font-size: 1rem;
-                padding: 10px 18px 10px 12px;
-            }
-        }
     </style>
 </head>
 
@@ -925,28 +808,27 @@
                         <label for="email">Email address</label>
                     </div>
                     <div class="form-group">
-                        <input type="text" name="mobile" id="mobile" value="(+84) " placeholder=" " />
+                        <input type="text" name="mobile" id="mobile" value="+84" placeholder=" " />
                         <label for="mobile">Mobile number</label>
                     </div>
                     <div>
-                        <label class="form-label" style="font-weight: bold;">Upload avatar image (Optional)</label>
-                        <div style="margin-bottom: 16px; ">
-                            <label for="avatarTypeFile"
-                                style="font-weight:500;display:inline-flex;align-items:center;margin-bottom:10px;">
-                                <input type="radio" name="avatarType" id="avatarTypeFile" value="file" checked
-                                    style="margin-right:6px;" />
-                                Avatar by Upload
-                            </label>
+                        <label class="form-label">Upload avatar image (Optional)</label>
+                        <div>
                             <label for="avatarTypeUrl"
-                                style="font-weight:500;display:inline-flex;align-items:center;margin-bottom:10px;">
-                                <input type="radio" name="avatarType" id="avatarTypeUrl" value="url"
+                                style="font-weight:500;display:inline-flex;align-items:center;margin-bottom:6px;">
+                                <input type="radio" name="avatarType" id="avatarTypeUrl" value="url" checked
                                     style="margin-right:6px;" />
                                 Avatar by URL
                             </label>
-
+                            <label for="avatarTypeFile"
+                                style="font-weight:500;display:inline-flex;align-items:center;margin-bottom:6px;margin-left:16px;">
+                                <input type="radio" name="avatarType" id="avatarTypeFile" value="file"
+                                    style="margin-right:6px;" />
+                                Avatar by Upload
+                            </label>
                         </div>
 
-                        <div id="avatarUrlInput">
+                        <div id="avatarUrlInput" style="margin-bottom: 12px;">
                             <div class="form-group">
                                 <input type="text" name="avatar" id="avatar" value="" placeholder=" " />
                                 <label for="avatar">Avatar image URL</label>
@@ -977,9 +859,9 @@
                                         </div>
                                         <h3 class="upload-title">Drop your image here</h3>
                                         <p class="upload-subtitle">or click to browse</p>
-                                        <p class="upload-info">Supports: JPG, PNG (Max 100kb)</p>
+                                        <p class="upload-info">Supports: JPG, PNG, GIF (Max 5MB)</p>
                                     </div>
-                                    <input type="file" name="avatarFile" id="avatarFile" accept=".jpg,.jpeg,.png"
+                                    <input type="file" name="avatarFile" id="avatarFile" accept="image/*"
                                         class="hidden-input" />
                                 </div>
                             </div>
@@ -1000,16 +882,12 @@
                     </div>
                     <div id="address"
                         style="display:flex; align-items:flex-start; flex-direction: column;margin-top: 16px;">
-                        <label class="form-label" style="margin-bottom:0;font-weight: bold;">Office: </label>
-                        <div class="office-radio-group">
-                            <label class="office-radio"><input type="radio" name="addressId" value="tv"
-                                    checked /><span>Tan Vien</span></label>
-                            <label class="office-radio"><input type="radio" name="addressId" value="dn" /><span>Da
-                                    Nang</span></label>
-                            <label class="office-radio"><input type="radio" name="addressId"
-                                    value="us" /><span>Atlanta</span></label>
-                            <label class="office-radio"><input type="radio" name="addressId"
-                                    value="mx" /><span>Mexico</span></label>
+                        <label class="form-label" style="margin-bottom:0;">Office: </label>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; margin-bottom: 8px;">
+                            <label><input type="radio" name="addressId" value="tv" checked /> Tan Vien</label>
+                            <label><input type="radio" name="addressId" value="dn" /> Da Nang</label>
+                            <label><input type="radio" name="addressId" value="us" /> Atlanta</label>
+                            <label><input type="radio" name="addressId" value="mx" /> Mexico</label>
                         </div>
                     </div>
                 </form>
@@ -1143,8 +1021,8 @@
                 // Use the URL from the input field
                 avatar = document.getElementById("avatar").value || "";
             } else if (avatarType === "file") {
-                // Use the uploaded base64 image for file upload mode
-                avatar = window._uploadedImageBase64 || "";
+                // Use the uploaded image URL from Cloudinary
+                avatar = window._uploadedImageUrl || "";
             }
 
             const name = document.getElementById("name").value || "[add your name]";
@@ -1168,7 +1046,7 @@
                     document.getElementById('avatarUrlInput').style.display = '';
                     document.getElementById('avatarFileInput').style.display = 'none';
                     // Clear uploaded image when switching to URL mode
-                    window._uploadedImageBase64 = "";
+                    window._uploadedImageUrl = "";
                     // Clear file preview
                     preview.style.display = 'none';
                     preview.innerHTML = '';
@@ -1184,6 +1062,9 @@
                 updateRemoveButtonVisibility();
             });
         });
+
+        const CLOUDINARY_CLOUD_NAME = 'dtnetvoyh';
+        const CLOUDINARY_UPLOAD_PRESET = 'kms-signature-images';
 
         // Enhanced file upload with drag and drop
         const fileDropZone = document.getElementById('fileDropZone');
@@ -1227,12 +1108,8 @@
         }
 
         // Handle file selection via click
-        fileDropZone.addEventListener('click', (e) => {
-            // Only trigger file input if the click is not on the file input itself
-            if (e.target !== fileInput) {
-                fileInput.value = '';
-                fileInput.click();
-            }
+        fileDropZone.addEventListener('click', () => {
+            fileInput.click();
         });
 
         // Handle file input change
@@ -1246,16 +1123,15 @@
 
             const file = files[0];
 
-            // Validate file type (JPG, JPEG, PNG only)
-            if (!(file.type === 'image/jpeg' || file.type === 'image/png')) {
-                showError('Only JPG, JPEG, or PNG files are allowed');
+            // Validate file type
+            if (!file.type.startsWith('image/')) {
+                showError('Please select an image file (JPG, PNG, GIF)');
                 return;
             }
 
-            // Validate file size (10MB limit)
-            const LIMIT_AVATAR_UPLOAD_FILE = 100 * 1024;
-            if (file.size > LIMIT_AVATAR_UPLOAD_FILE) {
-                showError('File size must be less than 100kb');
+            // Validate file size (5MB limit)
+            if (file.size > 5 * 1024 * 1024) {
+                showError('File size must be less than 5MB');
                 return;
             }
 
@@ -1270,20 +1146,15 @@
                 fileDropZone.appendChild(progressBar);
             }
 
-            // Read file as base64 and show preview
+            // Show preview immediately
             const reader = new FileReader();
             reader.onload = function (e) {
-                window._uploadedImageBase64 = e.target.result;
                 showFilePreview(file, e.target.result);
-                fileDropZone.classList.remove('uploading');
-                fileDropZone.classList.add('success');
-                setTimeout(() => {
-                    fileDropZone.classList.remove('success');
-                }, 2000);
-                handleChange();
-                updateRemoveButtonVisibility();
             };
             reader.readAsDataURL(file);
+
+            // Upload to Cloudinary
+            uploadToCloudinary(file);
         }
 
         function showFilePreview(file, previewUrl) {
@@ -1296,6 +1167,42 @@
                     <div class="file-size">${fileSize} MB</div>
                 </div>
             `;
+        }
+
+        function uploadToCloudinary(file) {
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+
+            fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    fileDropZone.classList.remove('uploading');
+                    fileDropZone.classList.add('success');
+
+                    if (data.secure_url) {
+                        // Store the uploaded image URL for file upload mode
+                        window._uploadedImageUrl = data.secure_url;
+
+                        // Show success message
+                        setTimeout(() => {
+                            fileDropZone.classList.remove('success');
+                        }, 2000);
+
+                        // Update the signature preview with the uploaded image
+                        handleChange();
+                        updateRemoveButtonVisibility();
+                    } else {
+                        showError('Upload failed. Please try again.');
+                    }
+                })
+                .catch(() => {
+                    fileDropZone.classList.remove('uploading');
+                    showError('Upload failed. Please try again.');
+                });
         }
 
         function showError(message) {
@@ -1341,8 +1248,8 @@
                 // Hide remove button
                 document.getElementById('removeAvatarUrl').style.display = 'none';
             } else if (avatarType === 'file') {
-                // Clear uploaded base64 image
-                window._uploadedImageBase64 = "";
+                // Clear uploaded image
+                window._uploadedImageUrl = "";
                 // Reset file upload zone
                 resetFileUpload();
                 // Hide preview and remove button
@@ -1364,7 +1271,7 @@
                 const removeBtn = document.getElementById('removeAvatarUrl');
                 removeBtn.style.display = avatarUrl ? 'flex' : 'none';
             } else if (avatarType === 'file') {
-                const hasUploadedImage = window._uploadedImageBase64 && window._uploadedImageBase64.trim();
+                const hasUploadedImage = window._uploadedImageUrl && window._uploadedImageUrl.trim();
                 const removeBtn = document.getElementById('removeAvatarFile');
                 removeBtn.style.display = hasUploadedImage ? 'flex' : 'none';
             }
@@ -1450,10 +1357,6 @@
 
         // Event listener registration
         document.addEventListener("DOMContentLoaded", () => {
-            // Set file upload as default
-            document.getElementById('avatarTypeFile').checked = true;
-            document.getElementById('avatarUrlInput').style.display = 'none';
-            document.getElementById('avatarFileInput').style.display = '';
             handleChange();
             updateRemoveButtonVisibility();
         });
