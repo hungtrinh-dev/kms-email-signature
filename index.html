@@ -21,6 +21,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            scroll-behavior: smooth;
         }
 
         .page-wrapper {
@@ -97,6 +98,24 @@
                 font-size: 0.98rem;
                 margin-bottom: 1em;
             }
+
+            .form-group input[type="text"] {
+                padding: 14px 16px;
+                font-size: 1rem;
+            }
+
+            .form-group label {
+                font-size: 1rem;
+                top: 14px;
+                left: 16px;
+            }
+
+            .form-group input[type="text"]:focus+label,
+            .form-group input[type="text"]:not(:placeholder-shown)+label {
+                font-size: 0.8rem;
+                top: -6px;
+                left: 12px;
+            }
         }
 
         .container {
@@ -144,21 +163,357 @@
         form input[type="text"] {
             width: 100%;
             max-width: 100%;
-            padding: 14px 16px;
-            border-radius: 10px;
-            border: 1.5px solid #e0e4ea;
-            margin-bottom: 22px;
+            padding: 16px 18px;
+            border-radius: 12px;
+            border: 2px solid #e0e4ea;
+            margin-bottom: 24px;
             font-size: 1.05rem;
-            background: #f7fafc;
-            transition: border 0.2s, box-shadow 0.2s;
+            background: #f8fafc;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             word-break: break-word;
+            position: relative;
+            color: #2d3748;
+            font-weight: 400;
+        }
+
+        form input[type="text"]:hover {
+            border-color: #cbd5e0;
+            background: #f7fafc;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
 
         form input[type="text"]:focus {
-            border: 1.5px solid #27aae1;
+            border: 2px solid #27aae1;
             outline: none;
-            box-shadow: 0 0 0 2px #00b54922;
+            box-shadow: 0 0 0 3px rgba(39, 170, 225, 0.15);
             background: #fff;
+            transform: translateY(-2px);
+        }
+
+        form input[type="text"]::placeholder {
+            color: #a0aec0;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        form input[type="text"]:focus::placeholder {
+            color: #cbd5e0;
+            transform: translateX(4px);
+        }
+
+        /* Floating label effect */
+        .form-group {
+            position: relative;
+            margin-bottom: 24px;
+        }
+
+        .form-group input[type="text"] {
+            margin-bottom: 0;
+        }
+
+        .form-group label {
+            position: absolute;
+            top: 16px;
+            left: 18px;
+            font-size: 1.05rem;
+            color: #a0aec0;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            background: transparent;
+            padding: 0 4px;
+        }
+
+        .form-group input[type="text"]:focus+label,
+        .form-group input[type="text"]:not(:placeholder-shown)+label {
+            top: -8px;
+            left: 14px;
+            font-size: 0.85rem;
+            color: #27aae1;
+            font-weight: 600;
+            background: #fff;
+        }
+
+        .form-group input[type="text"]:focus+label {
+            color: #27aae1;
+        }
+
+        /* Input validation states */
+        form input[type="text"].valid {
+            border-color: #48bb78;
+            box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.15);
+        }
+
+        form input[type="text"].invalid {
+            border-color: #f56565;
+            box-shadow: 0 0 0 3px rgba(245, 101, 101, 0.15);
+        }
+
+        /* Loading state for inputs */
+        form input[type="text"].loading {
+            background: linear-gradient(90deg, #f7fafc 25%, #edf2f7 50%, #f7fafc 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        /* Enhanced focus ring animation */
+        form input[type="text"]:focus {
+            animation: focusRing 0.3s ease-out;
+        }
+
+        @keyframes focusRing {
+            0% {
+                box-shadow: 0 0 0 0 rgba(39, 170, 225, 0.4);
+            }
+
+            100% {
+                box-shadow: 0 0 0 3px rgba(39, 170, 225, 0.15);
+            }
+        }
+
+        /* Custom File Upload Styles */
+        .custom-file-upload {
+            margin-bottom: 20px;
+        }
+
+        .file-drop-zone {
+            border: 2px dashed #cbd5e0;
+            border-radius: 16px;
+            padding: 40px 20px;
+            text-align: center;
+            background: #f8fafc;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .file-drop-zone:hover {
+            border-color: #27aae1;
+            background: #f0f9ff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(39, 170, 225, 0.15);
+        }
+
+        .file-drop-zone.dragover {
+            border-color: #27aae1;
+            background: #e6f7ff;
+            transform: scale(1.02);
+            box-shadow: 0 12px 35px rgba(39, 170, 225, 0.25);
+        }
+
+        .file-drop-zone.dragover .upload-icon {
+            transform: scale(1.1);
+            color: #27aae1;
+        }
+
+        .file-drop-zone.dragover .upload-title {
+            color: #27aae1;
+        }
+
+        .file-drop-content {
+            pointer-events: none;
+        }
+
+        .upload-icon {
+            color: #94a3b8;
+            margin-bottom: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .upload-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+            transition: color 0.3s ease;
+        }
+
+        .upload-subtitle {
+            font-size: 1rem;
+            color: #6b7280;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .upload-info {
+            font-size: 0.9rem;
+            color: #9ca3af;
+            margin: 0;
+        }
+
+        .hidden-input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .file-preview {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            text-align: center;
+        }
+
+        .file-preview img {
+            max-width: 120px;
+            max-height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 12px;
+        }
+
+        .file-preview .file-info {
+            margin-top: 12px;
+        }
+
+        .file-info .file-name {
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 4px;
+        }
+
+        .file-info .file-size {
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        .base64-textarea {
+            width: 100%;
+            height: 80px;
+            font-size: 0.9rem;
+            padding: 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            background: #f9fafb;
+            font-family: 'Courier New', monospace;
+            resize: vertical;
+            margin-bottom: 12px;
+        }
+
+        .copy-base64-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+        }
+
+        .copy-base64-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Upload progress animation */
+        .upload-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #27aae1, #21b2f0);
+            border-radius: 0 0 16px 16px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .file-drop-zone.uploading .upload-progress {
+            width: 100%;
+            animation: uploadProgress 2s ease-in-out;
+        }
+
+        @keyframes uploadProgress {
+            0% {
+                width: 0%;
+            }
+
+            50% {
+                width: 60%;
+            }
+
+            100% {
+                width: 100%;
+            }
+        }
+
+        /* Success state */
+        .file-drop-zone.success {
+            border-color: #10b981;
+            background: #f0fdf4;
+        }
+
+        .file-drop-zone.success .upload-icon {
+            color: #10b981;
+        }
+
+        .file-drop-zone.success .upload-title {
+            color: #10b981;
+        }
+
+        /* Error state */
+        .file-drop-zone.error {
+            border-color: #ef4444;
+            background: #fef2f2;
+        }
+
+        .file-drop-zone.error .upload-icon {
+            color: #ef4444;
+        }
+
+        .file-drop-zone.error .upload-title {
+            color: #ef4444;
+        }
+
+        /* Remove Avatar Button */
+        .remove-avatar-btn {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 12px;
+            width: fit-content;
+        }
+
+        .remove-avatar-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+        }
+
+        .remove-avatar-btn svg {
+            width: 14px;
+            height: 14px;
         }
 
         #address {
@@ -228,6 +583,10 @@
             align-items: center;
             border-right: 4px solid #27aae1;
             min-height: 540px;
+            position: sticky;
+            top: 40px;
+            align-self: flex-start;
+            transition: transform 0.3s ease;
         }
 
         .display.column .step {
@@ -339,6 +698,11 @@
                 padding: 32px 4vw 28px 4vw;
             }
 
+            .display.column {
+                position: static;
+                top: auto;
+            }
+
             #idisplay {
                 min-width: 0;
                 width: 100%;
@@ -431,39 +795,100 @@
             <div class="content column">
                 <div class="step">Step 1: Update your information</div>
                 <form>
-                    <label for="name" class="form-label">Full name</label>
-                    <input type="text" name="name" id="name" value="" placeholder="Full name" />
-                    <label for="title" class="form-label">Your title</label>
-                    <input type="text" name="title" id="title" value="" placeholder="Title" />
-                    <label for="email" class="form-label">Email address</label>
-                    <input type="text" name="email" id="email" value="" placeholder="Email address" />
-                    <label for="mobile" class="form-label">Mobile number</label>
-                    <input type="text" name="mobile" id="mobile" value="" placeholder="Mobile number" />
-                    <label for="avatarTypeUrl" style="font-weight:500;display:inline-flex;align-items:center;margin-bottom:6px;">
-                        <input type="radio" name="avatarType" id="avatarTypeUrl" value="url" checked style="margin-right:6px;" />
-                        Avatar by URL
-                    </label>
-                    <label for="avatarTypeFile" style="font-weight:500;display:inline-flex;align-items:center;margin-bottom:6px;margin-left:16px;">
-                        <input type="radio" name="avatarType" id="avatarTypeFile" value="file" style="margin-right:6px;" />
-                        Avatar by Upload
-                    </label>
-                    <div id="avatarUrlInput">
-                        <label for="avatar" class="form-label">Avatar image URL (Optional)</label>
-                        <input type="text" name="avatar" id="avatar" value="" placeholder="Avatar image URL" />
+                    <div class="form-group">
+                        <input type="text" name="name" id="name" value="" placeholder=" " />
+                        <label for="name">Full name</label>
                     </div>
-                    <div id="avatarFileInput" style="display:none;">
-                        <label for="avatarFile" class="form-label">Upload avatar image (Optional)</label>
-                        <input type="file" name="avatarFile" id="avatarFile" accept="image/*" style="margin-bottom:10px;" />
-                        <div id="avatarFilePreview" style="margin-bottom:8px;"></div>
-                        <textarea id="avatarBase64" readonly style="width:100%;height:60px;font-size:0.95rem;margin-bottom:6px;display:none;"></textarea>
-                        <button type="button" id="copyBase64Btn" style="display:none;margin-bottom:10px;">Copy Base64</button>
+                    <div class="form-group">
+                        <input type="text" name="title" id="title" value="" placeholder=" " />
+                        <label for="title">Your title</label>
                     </div>
-                    <div id="address">
+                    <div class="form-group">
+                        <input type="text" name="email" id="email" value="" placeholder=" " />
+                        <label for="email">Email address</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="mobile" id="mobile" value="+84" placeholder=" " />
+                        <label for="mobile">Mobile number</label>
+                    </div>
+                    <div>
+                        <label class="form-label">Upload avatar image (Optional)</label>
+                        <div>
+                            <label for="avatarTypeUrl"
+                                style="font-weight:500;display:inline-flex;align-items:center;margin-bottom:6px;">
+                                <input type="radio" name="avatarType" id="avatarTypeUrl" value="url" checked
+                                    style="margin-right:6px;" />
+                                Avatar by URL
+                            </label>
+                            <label for="avatarTypeFile"
+                                style="font-weight:500;display:inline-flex;align-items:center;margin-bottom:6px;margin-left:16px;">
+                                <input type="radio" name="avatarType" id="avatarTypeFile" value="file"
+                                    style="margin-right:6px;" />
+                                Avatar by Upload
+                            </label>
+                        </div>
+
+                        <div id="avatarUrlInput" style="margin-bottom: 12px;">
+                            <div class="form-group">
+                                <input type="text" name="avatar" id="avatar" value="" placeholder=" " />
+                                <label for="avatar">Avatar image URL</label>
+                            </div>
+                            <button type="button" id="removeAvatarUrl" class="remove-avatar-btn" style="display:none;">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                Remove avatar
+                            </button>
+                        </div>
+                        <div id="avatarFileInput" style="display:none;">
+                            <div class="custom-file-upload">
+                                <div class="file-drop-zone" id="fileDropZone">
+                                    <div class="file-drop-content">
+                                        <div class="upload-icon">
+                                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M12 16L12 8M12 8L15 11M12 8L9 11" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                <path
+                                                    d="M3 15V16C3 18.8284 3 20.2426 3.87868 21.1213C4.75736 22 6.17157 22 9 22H15C17.8284 22 19.2426 22 20.1213 21.1213C21 20.2426 21 18.8284 21 16V15"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                            </svg>
+                                        </div>
+                                        <h3 class="upload-title">Drop your image here</h3>
+                                        <p class="upload-subtitle">or click to browse</p>
+                                        <p class="upload-info">Supports: JPG, PNG, GIF (Max 5MB)</p>
+                                    </div>
+                                    <input type="file" name="avatarFile" id="avatarFile" accept="image/*"
+                                        class="hidden-input" />
+                                </div>
+                            </div>
+                            <div id="avatarFilePreview" class="file-preview" style="display:none;"></div>
+                            <textarea id="avatarBase64" readonly class="base64-textarea"
+                                style="display:none;"></textarea>
+                            <button type="button" id="copyBase64Btn" class="copy-base64-btn" style="display:none;">Copy
+                                Base64</button>
+                            <button type="button" id="removeAvatarFile" class="remove-avatar-btn" style="display:none;">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                Remove avatar
+                            </button>
+                        </div>
+                    </div>
+                    <div id="address"
+                        style="display:flex; align-items:flex-start; flex-direction: column;margin-top: 16px;">
                         <label class="form-label" style="margin-bottom:0;">Office: </label>
-                        <label><input type="radio" name="addressId" value="tv" checked /> Tan Vien</label>
-                        <label><input type="radio" name="addressId" value="dn" /> Da Nang</label>
-                        <label><input type="radio" name="addressId" value="us" /> Atlanta</label>
-                        <label><input type="radio" name="addressId" value="mx" /> Mexico</label>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; margin-bottom: 8px;">
+                            <label><input type="radio" name="addressId" value="tv" checked /> Tan Vien</label>
+                            <label><input type="radio" name="addressId" value="dn" /> Da Nang</label>
+                            <label><input type="radio" name="addressId" value="us" /> Atlanta</label>
+                            <label><input type="radio" name="addressId" value="mx" /> Mexico</label>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -519,7 +944,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>KMS Email Signature</title><meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i&amp;display=swap" rel="stylesheet" />
-    <style type="text/css">body{margin:0;padding:0;font-family:Roboto,sans-serif;background-color:transparent;line-height:normal}a,a:hover,a:active,a:link,a:visited{text-decoration:none !important;color:#424142}#container{margin:0;padding:0}#corp-section{padding:0 12px}#contact-section{border-left:1px solid rgb(217,217,217);padding:0 12px;font-size:9pt;color:rgb(89,89,89);font-family: Roboto, sans-serif}.logo {margin-bottom: 7px;}#contact-name{font-size:11pt;font-family: Roboto, sans-serif;color:#27aae1;font-weight:bold;line-height:normal}#contact-title{margin-top:2px;line-height:normal;color:#595959}.contact-sub-info{margin-top:6px; display:flex;}a{text-decoration: none;} .contact-info{line-height:normal;}</style>
+    <style type="text/css">body{margin:0;padding:0;font-family:Roboto,sans-serif;background-color:transparent;line-height:normal}a,a:hover,a:active,a:link,a:visited{text-decoration:none !important;color:#424142}#container{margin:0;padding:0}#corp-section{padding:0 10px}#contact-section{border-left:1px solid rgb(217,217,217);padding:0 10px;font-size:9pt;color:rgb(89,89,89);font-family: Roboto, sans-serif}.logo {margin-bottom: 7px;}#contact-name{font-size:11pt;font-family: Roboto, sans-serif;color:#27aae1;font-weight:bold;line-height:normal}#contact-title{margin-top:2px;line-height:normal;color:#595959}.contact-sub-info{margin-top:6px; display:flex;}a{text-decoration: none;} .contact-info{line-height:normal;}</style>
     <style>
     
     </style>
@@ -529,7 +954,7 @@
   <table id="container">
       <td id="corp-section">
         <div class="logo" style="padding-top:16px">
-          <a href="https://kms-technology.com/" target="_blank" rel="noopener noreferrer"><img src="${LOGO}" alt="KMS Logo" width="168px"/></a>
+          <a href="https://kms-technology.com/" target="_blank" rel="noopener noreferrer"><img src="${LOGO}" alt="KMS Logo" width="113px"/></a>
         </div>
         <table style="width: 100%; border-collapse: collapse; margin: 0 auto;">
             <tr>
@@ -591,20 +1016,20 @@
         const handleChange = () => {
             let avatar = "";
             const avatarType = document.querySelector('input[name="avatarType"]:checked').value;
+
             if (avatarType === "url") {
+                // Use the URL from the input field
                 avatar = document.getElementById("avatar").value || "";
             } else if (avatarType === "file") {
-                avatar = window._avatarBase64 || "";
+                // Use the uploaded image URL from Cloudinary
+                avatar = window._uploadedImageUrl || "";
             }
+
             const name = document.getElementById("name").value || "[add your name]";
-            const title =
-                document.getElementById("title").value || "[add your title]";
+            const title = document.getElementById("title").value || "[add your title]";
             const email = document.getElementById("email").value || "[add your email]";
-            const mobile =
-                document.getElementById("mobile").value || "[add your mobile number]";
-            const addressId = document.querySelector(
-                'input[name="addressId"]:checked'
-            ).value;
+            const mobile = document.getElementById("mobile").value || "[add your mobile number]";
+            const addressId = document.querySelector('input[name="addressId"]:checked').value;
 
             const addr = ADDRESSES[addressId];
             const address = addr ? addr.address : "[select your office]";
@@ -616,72 +1041,242 @@
 
         // Avatar type toggle logic
         document.querySelectorAll('input[name="avatarType"]').forEach((el) => {
-            el.addEventListener('change', function() {
+            el.addEventListener('change', function () {
                 if (this.value === 'url') {
                     document.getElementById('avatarUrlInput').style.display = '';
                     document.getElementById('avatarFileInput').style.display = 'none';
+                    // Clear uploaded image when switching to URL mode
+                    window._uploadedImageUrl = "";
+                    // Clear file preview
+                    preview.style.display = 'none';
+                    preview.innerHTML = '';
+                    // Reset file upload zone
+                    resetFileUpload();
                 } else {
                     document.getElementById('avatarUrlInput').style.display = 'none';
                     document.getElementById('avatarFileInput').style.display = '';
+                    // Clear URL input when switching to file mode
+                    document.getElementById('avatar').value = '';
                 }
                 handleChange();
+                updateRemoveButtonVisibility();
             });
         });
 
         const CLOUDINARY_CLOUD_NAME = 'dtnetvoyh';
         const CLOUDINARY_UPLOAD_PRESET = 'kms-signature-images';
-        // Avatar file upload logic
-        document.getElementById('avatarFile').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            const preview = document.getElementById('avatarFilePreview');
-            const base64Area = document.getElementById('avatarBase64');
-            const copyBtn = document.getElementById('copyBase64Btn');
-            if (!file) {
-                preview.innerHTML = '';
-                base64Area.style.display = 'none';
-                copyBtn.style.display = 'none';
-                window._avatarBase64 = '';
-                handleChange();
+
+        // Enhanced file upload with drag and drop
+        const fileDropZone = document.getElementById('fileDropZone');
+        const fileInput = document.getElementById('avatarFile');
+        const preview = document.getElementById('avatarFilePreview');
+        const base64Area = document.getElementById('avatarBase64');
+
+        // Drag and drop functionality
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            fileDropZone.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            fileDropZone.addEventListener(eventName, highlight, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            fileDropZone.addEventListener(eventName, unhighlight, false);
+        });
+
+        function highlight(e) {
+            fileDropZone.classList.add('dragover');
+        }
+
+        function unhighlight(e) {
+            fileDropZone.classList.remove('dragover');
+        }
+
+        // Handle dropped files
+        fileDropZone.addEventListener('drop', handleDrop, false);
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            handleFiles(files);
+        }
+
+        // Handle file selection via click
+        fileDropZone.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        // Handle file input change
+        fileInput.addEventListener('change', function (e) {
+            const files = e.target.files;
+            handleFiles(files);
+        });
+
+        function handleFiles(files) {
+            if (files.length === 0) return;
+
+            const file = files[0];
+
+            // Validate file type
+            if (!file.type.startsWith('image/')) {
+                showError('Please select an image file (JPG, PNG, GIF)');
                 return;
             }
-            // Show loading indicator
-            preview.innerHTML = '<span style="color:#27aae1;font-size:0.98rem;">Uploading to Cloudinary...</span>';
-            base64Area.style.display = 'none';
-            copyBtn.style.display = 'none';
-            // Prepare form data
+
+            // Validate file size (5MB limit)
+            if (file.size > 5 * 1024 * 1024) {
+                showError('File size must be less than 5MB');
+                return;
+            }
+
+            // Show upload progress
+            fileDropZone.classList.add('uploading');
+            fileDropZone.classList.remove('error', 'success');
+
+            // Add progress bar
+            if (!fileDropZone.querySelector('.upload-progress')) {
+                const progressBar = document.createElement('div');
+                progressBar.className = 'upload-progress';
+                fileDropZone.appendChild(progressBar);
+            }
+
+            // Show preview immediately
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                showFilePreview(file, e.target.result);
+            };
+            reader.readAsDataURL(file);
+
+            // Upload to Cloudinary
+            uploadToCloudinary(file);
+        }
+
+        function showFilePreview(file, previewUrl) {
+            const fileSize = (file.size / 1024 / 1024).toFixed(2);
+            preview.style.display = 'block';
+            preview.innerHTML = `
+                <img src="${previewUrl}" alt="Avatar preview" />
+                <div class="file-info">
+                    <div class="file-name">${file.name}</div>
+                    <div class="file-size">${fileSize} MB</div>
+                </div>
+            `;
+        }
+
+        function uploadToCloudinary(file) {
             const formData = new FormData();
             formData.append('file', file);
             formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-            // Upload to Cloudinary
+
             fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, {
                 method: 'POST',
                 body: formData
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.secure_url) {
-                    // Show preview
-                    preview.innerHTML = `<img src="${data.secure_url}" alt="Avatar preview" style="width:60px;height:60px;border-radius:50%;object-fit:cover;" />`;
-                    // Set avatar URL input and switch to URL mode
-                    document.getElementById('avatar').value = data.secure_url;
-                    document.getElementById('avatarTypeUrl').checked = true;
-                    document.getElementById('avatarUrlInput').style.display = '';
-                    document.getElementById('avatarFileInput').style.display = 'none';
-                    // Show success message
-                    const msg = document.createElement('div');
-                    msg.textContent = 'Image uploaded! URL inserted below.';
-                    msg.style = 'color:#27aae1;font-size:0.98rem;margin-top:6px;';
-                    preview.appendChild(msg);
-                    handleChange();
-                } else {
-                    preview.innerHTML = '<span style="color:red;font-size:0.98rem;">Upload failed. Please try again.</span>';
-                }
-            })
-            .catch(() => {
-                preview.innerHTML = '<span style="color:red;font-size:0.98rem;">Upload failed. Please try again.</span>';
-            });
-        });
-        document.getElementById('copyBase64Btn').addEventListener('click', function() {
+                .then(response => response.json())
+                .then(data => {
+                    fileDropZone.classList.remove('uploading');
+                    fileDropZone.classList.add('success');
+
+                    if (data.secure_url) {
+                        // Store the uploaded image URL for file upload mode
+                        window._uploadedImageUrl = data.secure_url;
+
+                        // Show success message
+                        setTimeout(() => {
+                            fileDropZone.classList.remove('success');
+                        }, 2000);
+
+                        // Update the signature preview with the uploaded image
+                        handleChange();
+                        updateRemoveButtonVisibility();
+                    } else {
+                        showError('Upload failed. Please try again.');
+                    }
+                })
+                .catch(() => {
+                    fileDropZone.classList.remove('uploading');
+                    showError('Upload failed. Please try again.');
+                });
+        }
+
+        function showError(message) {
+            fileDropZone.classList.add('error');
+            fileDropZone.classList.remove('uploading', 'success');
+
+            // Update upload title to show error
+            const title = fileDropZone.querySelector('.upload-title');
+            const originalText = title.textContent;
+            title.textContent = message;
+
+            setTimeout(() => {
+                fileDropZone.classList.remove('error');
+                title.textContent = originalText;
+            }, 3000);
+        }
+
+        function resetFileUpload() {
+            // Remove progress bar if exists
+            const progressBar = fileDropZone.querySelector('.upload-progress');
+            if (progressBar) {
+                progressBar.remove();
+            }
+
+            // Reset file input
+            fileInput.value = '';
+
+            // Clear any states
+            fileDropZone.classList.remove('uploading', 'success', 'error', 'dragover');
+
+            // Reset title to original
+            const title = fileDropZone.querySelector('.upload-title');
+            title.textContent = 'Drop your image here';
+        }
+
+        // Remove avatar functionality
+        function removeAvatar() {
+            const avatarType = document.querySelector('input[name="avatarType"]:checked').value;
+
+            if (avatarType === 'url') {
+                // Clear URL input
+                document.getElementById('avatar').value = '';
+                // Hide remove button
+                document.getElementById('removeAvatarUrl').style.display = 'none';
+            } else if (avatarType === 'file') {
+                // Clear uploaded image
+                window._uploadedImageUrl = "";
+                // Reset file upload zone
+                resetFileUpload();
+                // Hide preview and remove button
+                preview.style.display = 'none';
+                preview.innerHTML = '';
+                document.getElementById('removeAvatarFile').style.display = 'none';
+            }
+
+            // Update signature preview
+            handleChange();
+        }
+
+        // Show/hide remove buttons based on avatar presence
+        function updateRemoveButtonVisibility() {
+            const avatarType = document.querySelector('input[name="avatarType"]:checked').value;
+
+            if (avatarType === 'url') {
+                const avatarUrl = document.getElementById('avatar').value.trim();
+                const removeBtn = document.getElementById('removeAvatarUrl');
+                removeBtn.style.display = avatarUrl ? 'flex' : 'none';
+            } else if (avatarType === 'file') {
+                const hasUploadedImage = window._uploadedImageUrl && window._uploadedImageUrl.trim();
+                const removeBtn = document.getElementById('removeAvatarFile');
+                removeBtn.style.display = hasUploadedImage ? 'flex' : 'none';
+            }
+        }
+        document.getElementById('copyBase64Btn').addEventListener('click', function () {
             const base64Area = document.getElementById('avatarBase64');
             base64Area.select();
             document.execCommand('copy');
@@ -705,14 +1300,81 @@
             alert(message);
         };
 
+        // Enhanced form validation and UX
+        const validateEmail = (email) => {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        };
+
+        const validateMobile = (mobile) => {
+            const re = /^[\+]?[1-9][\d]{0,15}$/;
+            return re.test(mobile.replace(/[\s\-\(\)]/g, ''));
+        };
+
+        const validateField = (input) => {
+            const value = input.value.trim();
+            input.classList.remove('valid', 'invalid');
+
+            if (!value) return;
+
+            if (input.id === 'email' && value) {
+                if (validateEmail(value)) {
+                    input.classList.add('valid');
+                } else {
+                    input.classList.add('invalid');
+                }
+            } else if (input.id === 'mobile' && value) {
+                if (validateMobile(value)) {
+                    input.classList.add('valid');
+                } else {
+                    input.classList.add('invalid');
+                }
+            } else if (value.length > 2) {
+                input.classList.add('valid');
+            }
+        };
+
+        // Add input validation listeners
+        document.querySelectorAll('input[type="text"]').forEach(input => {
+            input.addEventListener('blur', () => validateField(input));
+            input.addEventListener('input', () => {
+                input.classList.remove('valid', 'invalid');
+                validateField(input);
+            });
+        });
+
+        // Enhanced focus effects
+        document.querySelectorAll('input[type="text"]').forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.style.transform = 'scale(1.02)';
+                input.parentElement.style.transition = 'transform 0.2s ease';
+            });
+
+            input.addEventListener('blur', () => {
+                input.parentElement.style.transform = 'scale(1)';
+            });
+        });
+
         // Event listener registration
-        document.addEventListener("DOMContentLoaded", handleChange);
+        document.addEventListener("DOMContentLoaded", () => {
+            handleChange();
+            updateRemoveButtonVisibility();
+        });
 
         document
             .querySelectorAll(
                 "#name, #title, #email, #mobile, #avatar, #googlechatId, input[name='addressId'], input[name='logo'], input[name='avatarType']"
             )
-            .forEach((e) => e.addEventListener("input", handleChange));
+            .forEach((e) => {
+                e.addEventListener("input", () => {
+                    handleChange();
+                    updateRemoveButtonVisibility();
+                });
+            });
+
+        // Remove avatar button event listeners
+        document.getElementById("removeAvatarUrl").addEventListener("click", removeAvatar);
+        document.getElementById("removeAvatarFile").addEventListener("click", removeAvatar);
 
         document.getElementById("copyBtn").addEventListener("click", handleCopy);
 
