@@ -664,6 +664,25 @@
             font-size: 0.98rem;
         }
 
+        /* Required field styling */
+        .required-field label::after {
+            content: " *";
+            color: #e53e3e;
+            font-weight: 600;
+        }
+
+        .required-field input[type="text"] {
+            border-color: #e0e4ea;
+        }
+
+        .required-field input[type="text"]:focus {
+            border-color: #27aae1;
+        }
+
+        .required-field input[type="text"].invalid {
+            border-color: #e53e3e;
+        }
+
         .footer {
             text-align: center;
             color: #b0b8c9;
@@ -912,20 +931,23 @@
             letter-spacing: 0.01em;
             opacity: 0;
             transform: translateY(-6px);
-            transition: opacity 0.25s cubic-bezier(.4,0,.2,1), transform 0.25s cubic-bezier(.4,0,.2,1);
+            transition: opacity 0.25s cubic-bezier(.4, 0, .2, 1), transform 0.25s cubic-bezier(.4, 0, .2, 1);
             pointer-events: none;
             display: block;
         }
+
         .input-error.show {
             opacity: 1;
             transform: translateY(0);
             pointer-events: auto;
         }
+
         /* Add CSS for fade transition on iframe */
         #idisplay {
-            transition: opacity 0.25s cubic-bezier(.4,0,.2,1);
+            transition: opacity 0.25s cubic-bezier(.4, 0, .2, 1);
             opacity: 1;
         }
+
         #idisplay.fading {
             opacity: 0.3;
         }
@@ -940,11 +962,11 @@
             <div class="content column">
                 <div class="step">Step 1: Update your information</div>
                 <form>
-                    <div class="form-group">
+                    <div class="form-group required-field">
                         <input type="text" name="name" id="name" value="" placeholder=" " />
                         <label for="name">Full name</label>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group required-field">
                         <input type="text" name="title" id="title" value="" placeholder=" " />
                         <label for="title">Your title</label>
                     </div>
@@ -953,17 +975,30 @@
                         <label for="email">Email address</label>
                         <div id="emailError" class="input-error"></div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group required-field">
                         <input type="text" name="mobile" id="mobile" value="(+84) " placeholder=" " />
                         <label for="mobile">Mobile number</label>
                         <div id="mobileError" class="input-error"></div>
                     </div>
+                    <div id="address"
+                        style="display:flex; align-items:flex-start; flex-direction: column;margin-top: 16px;">
+                        <label class="form-label required-field" style="margin-bottom:0;font-weight: bold;">Office:
+                            <span style="color: #e53e3e; font-weight: 600;">*</span></label>
+                        <div class="office-radio-group">
+                            <label class="office-radio"><input type="radio" name="addressId" value="tv"
+                                    checked /><span>Tan Vien</span></label>
+                            <label class="office-radio"><input type="radio" name="addressId" value="dn" /><span>Da
+                                    Nang</span></label>
+                            <label class="office-radio"><input type="radio" name="addressId"
+                                    value="us" /><span>Atlanta</span></label>
+                            <label class="office-radio"><input type="radio" name="addressId"
+                                    value="mx" /><span>Mexico</span></label>
+                        </div>
+                    </div>
                     <div>
-                        <label class="form-label" style="font-weight: bold;">Upload avatar image
-                            <i>(optional)</i></label>
                         <div style="margin-bottom: 16px; ">
-                            <label for="avatarTypeFile"
-                                style="font-weight:500;display:inline-flex;align-items:center;margin-bottom:10px;">
+                            <label for="avatarTypeFile "
+                                style="font-weight:500;display:inline-flex;align-items:center;margin-bottom:10px; margin-right: 16px;">
                                 <input type="radio" name="avatarType" id="avatarTypeFile" value="file" checked
                                     style="margin-right:6px;" />
                                 Avatar by Upload
@@ -1006,7 +1041,7 @@
                                                     stroke-linejoin="round" />
                                             </svg>
                                         </div>
-                                        <h3 class="upload-title">Drop your image here</h3>
+                                        <h3 class="upload-title">Upload avatar image (optional)</h3>
                                         <p class="upload-subtitle">or click to browse</p>
                                         <p class="upload-info">Supports: JPG, PNG (Max 100kb)</p>
                                     </div>
@@ -1027,20 +1062,6 @@
                                 </svg>
                                 Remove avatar
                             </button>
-                        </div>
-                    </div>
-                    <div id="address"
-                        style="display:flex; align-items:flex-start; flex-direction: column;margin-top: 16px;">
-                        <label class="form-label" style="margin-bottom:0;font-weight: bold;">Office: </label>
-                        <div class="office-radio-group">
-                            <label class="office-radio"><input type="radio" name="addressId" value="tv"
-                                    checked /><span>Tan Vien</span></label>
-                            <label class="office-radio"><input type="radio" name="addressId" value="dn" /><span>Da
-                                    Nang</span></label>
-                            <label class="office-radio"><input type="radio" name="addressId"
-                                    value="us" /><span>Atlanta</span></label>
-                            <label class="office-radio"><input type="radio" name="addressId"
-                                    value="mx" /><span>Mexico</span></label>
                         </div>
                     </div>
                 </form>
@@ -1513,7 +1534,7 @@
         // Debounce utility
         function debounce(func, wait) {
             let timeout;
-            return function(...args) {
+            return function (...args) {
                 clearTimeout(timeout);
                 timeout = setTimeout(() => func.apply(this, args), wait);
             };
