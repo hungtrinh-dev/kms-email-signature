@@ -683,6 +683,46 @@
             border-color: #e53e3e;
         }
 
+        /* Avatar type radio button styling */
+        label[for="avatarTypeFile"],
+        label[for="avatarTypeUrl"] {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        label[for="avatarTypeFile"]:hover,
+        label[for="avatarTypeUrl"]:hover {
+            border-color: #27aae1 !important;
+            background: #f0f9ff !important;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(39, 170, 225, 0.15);
+        }
+
+        /* Selected state styling */
+        .avatar-type-selected {
+            border-color: #27aae1 !important;
+            background: #e6f9f0 !important;
+            color: #27aae1 !important;
+            font-weight: 600 !important;
+        }
+
+        /* Focus state for accessibility */
+        .avatar-type-focus {
+            box-shadow: 0 0 0 2px rgba(39, 170, 225, 0.3) !important;
+        }
+
+        /* Section divider styling */
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, #e0e4ea 20%, #e0e4ea 80%, transparent 100%);
+            margin: 32px 0;
+            border: none;
+        }
+
+        .section-divider.dark {
+            background: linear-gradient(90deg, transparent 0%, #cbd5e0 20%, #cbd5e0 80%, transparent 100%);
+        }
+
         .footer {
             text-align: center;
             color: #b0b8c9;
@@ -962,6 +1002,7 @@
             <div class="content column">
                 <div class="step">Step 1: Update your information</div>
                 <form>
+                    <!-- Group 1: Personal Information -->
                     <div class="form-group required-field">
                         <input type="text" name="name" id="name" value="" placeholder=" " />
                         <label for="name">Full name</label>
@@ -980,6 +1021,11 @@
                         <label for="mobile">Mobile number</label>
                         <div id="mobileError" class="input-error"></div>
                     </div>
+
+                    <!-- Section Divider 1 -->
+                    <hr class="section-divider">
+
+                    <!-- Group 2: Office Selection -->
                     <div id="address"
                         style="display:flex; align-items:flex-start; flex-direction: column;margin-top: 16px;">
                         <label class="form-label required-field" style="margin-bottom:0;font-weight: bold;">Office:
@@ -995,36 +1041,26 @@
                                     value="mx" /><span>Mexico</span></label>
                         </div>
                     </div>
+
+                    <!-- Section Divider 2 -->
+                    <hr class="section-divider">
+
+                    <!-- Group 3: Avatar Upload -->
                     <div>
                         <div style="margin-bottom: 16px; ">
-                            <label for="avatarTypeFile "
-                                style="font-weight:500;display:inline-flex;align-items:center;margin-bottom:10px; margin-right: 16px;">
+                            <label for="avatarTypeFile"
+                                style="font-weight:500;display:inline-flex;align-items:center;margin-bottom:10px; margin-right: 16px; cursor: pointer; padding: 8px 12px; border-radius: 8px; border: 2px solid #e0e4ea; background: #f7fafc; transition: all 0.2s ease;">
                                 <input type="radio" name="avatarType" id="avatarTypeFile" value="file" checked
-                                    style="margin-right:6px;" />
+                                    style="margin-right:8px;" />
                                 Avatar by Upload
                             </label>
                             <label for="avatarTypeUrl"
-                                style="font-weight:500;display:inline-flex;align-items:center;margin-bottom:10px;">
+                                style="font-weight:500;display:inline-flex;align-items:center;margin-bottom:10px; cursor: pointer; padding: 8px 12px; border-radius: 8px; border: 2px solid #e0e4ea; background: #f7fafc; transition: all 0.2s ease;">
                                 <input type="radio" name="avatarType" id="avatarTypeUrl" value="url"
-                                    style="margin-right:6px;" />
+                                    style="margin-right:8px;" />
                                 Avatar by URL
                             </label>
 
-                        </div>
-
-                        <div id="avatarUrlInput">
-                            <div class="form-group">
-                                <input type="text" name="avatar" id="avatar" value="" placeholder=" " />
-                                <label for="avatar">Avatar image URL</label>
-                            </div>
-                            <button type="button" id="removeAvatarUrl" class="remove-avatar-btn" style="display:none;">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                                Remove avatar
-                            </button>
                         </div>
                         <div id="avatarFileInput" style="display:none;">
                             <div class="custom-file-upload">
@@ -1043,7 +1079,7 @@
                                         </div>
                                         <h3 class="upload-title">Upload avatar image (optional)</h3>
                                         <p class="upload-subtitle">or click to browse</p>
-                                        <p class="upload-info">Supports: JPG, PNG (Max 100kb)</p>
+                                        <p class="upload-info">Supports: JPG, JPEG, PNG (Max 100kb)</p>
                                     </div>
                                     <input type="file" name="avatarFile" id="avatarFile" accept=".jpg,.jpeg,.png"
                                         class="hidden-input" />
@@ -1063,6 +1099,21 @@
                                 Remove avatar
                             </button>
                         </div>
+                        <div id="avatarUrlInput">
+                            <div class="form-group">
+                                <input type="text" name="avatar" id="avatar" value="" placeholder=" " />
+                                <label for="avatar">Avatar image URL</label>
+                            </div>
+                            <button type="button" id="removeAvatarUrl" class="remove-avatar-btn" style="display:none;">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                Remove avatar
+                            </button>
+                        </div>
+
                     </div>
                 </form>
             </div>
@@ -1217,6 +1268,12 @@
         // Avatar type toggle logic
         document.querySelectorAll('input[name="avatarType"]').forEach((el) => {
             el.addEventListener('change', function () {
+                // Update visual styling for selected state
+                document.querySelectorAll('label[for^="avatarType"]').forEach(label => {
+                    label.classList.remove('avatar-type-selected');
+                });
+                document.querySelector(`label[for="${this.id}"]`).classList.add('avatar-type-selected');
+
                 if (this.value === 'url') {
                     document.getElementById('avatarUrlInput').style.display = '';
                     document.getElementById('avatarFileInput').style.display = 'none';
@@ -1607,6 +1664,10 @@
             document.getElementById('avatarTypeFile').checked = true;
             document.getElementById('avatarUrlInput').style.display = 'none';
             document.getElementById('avatarFileInput').style.display = '';
+
+            // Set initial selected state for avatar type
+            document.querySelector('label[for="avatarTypeFile"]').classList.add('avatar-type-selected');
+
             handleChange();
             updateRemoveButtonVisibility();
         });
@@ -1625,6 +1686,22 @@
         // Remove avatar button event listeners
         document.getElementById("removeAvatarUrl").addEventListener("click", removeAvatar);
         document.getElementById("removeAvatarFile").addEventListener("click", removeAvatar);
+
+        // Avatar type focus handling for better UX
+        document.querySelectorAll('input[name="avatarType"]').forEach((el) => {
+            el.addEventListener('focus', function () {
+                document.querySelectorAll('label[for^="avatarType"]').forEach(label => {
+                    label.classList.remove('avatar-type-focus');
+                });
+                document.querySelector(`label[for="${this.id}"]`).classList.add('avatar-type-focus');
+            });
+
+            el.addEventListener('blur', function () {
+                document.querySelectorAll('label[for^="avatarType"]').forEach(label => {
+                    label.classList.remove('avatar-type-focus');
+                });
+            });
+        });
 
         document.getElementById("copyBtn").addEventListener("click", handleCopy);
 
