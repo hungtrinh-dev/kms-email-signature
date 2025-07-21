@@ -812,8 +812,8 @@
             color: #a0aec0;
         }
 
-        body.dark-mode .form-group input[type="text"]:focus + label,
-        body.dark-mode .form-group input[type="text"]:not(:placeholder-shown) + label {
+        body.dark-mode .form-group input[type="text"]:focus+label,
+        body.dark-mode .form-group input[type="text"]:not(:placeholder-shown)+label {
             background: #2d3748;
             color: #27aae1;
         }
@@ -1217,6 +1217,47 @@
         #idisplay.fading {
             opacity: 0.3;
         }
+
+        .email-group {
+            position: relative;
+        }
+
+        .email-group input[type="text"] {
+            padding-right: 170px;
+        }
+
+        .email-group label {
+            position: absolute;
+            top: 16px;
+            left: 18px;
+            font-size: 1.05rem;
+            color: #a0aec0;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            background: transparent;
+            padding: 0 4px;
+            z-index: 2;
+        }
+
+        .email-group input[type="text"]:focus~label,
+        .email-group input[type="text"]:not(:placeholder-shown)~label {
+            top: -8px;
+            left: 14px;
+            font-size: 0.85rem;
+            color: #27aae1;
+            font-weight: 600;
+            background: #fff;
+        }
+
+        .email-group input[type="text"]:focus~label {
+            color: #27aae1;
+        }
+
+        /* For dark mode */
+        body.dark-mode .email-group label {
+            background: #2d3748;
+        }
     </style>
 </head>
 
@@ -1224,11 +1265,15 @@
     <!-- Dark Mode Toggle -->
     <button class="dark-mode-toggle" id="darkModeToggle" title="Toggle dark mode">
         <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/>
-            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2" />
+            <path
+                d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
-        <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: none;">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+            style="display: none;">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" />
         </svg>
         <span class="toggle-text">Light</span>
     </button>
@@ -1249,9 +1294,14 @@
                         <input type="text" name="title" id="title" value="" placeholder=" " />
                         <label for="title">Your title</label>
                     </div>
-                    <div class="form-group">
-                        <input type="text" name="email" id="email" value="" placeholder=" " />
-                        <label for="email">Email address</label>
+                    <div class="form-group email-group required-field">
+                        <div style="display: flex; align-items: center; position: relative;">
+                            <input type="text" name="email" id="email" value="" placeholder=" "
+                                style="padding-right: 170px;" />
+                            <label for="email">Email address</label>
+                            <span class="email-suffix"
+                                style="position: absolute; right: 12px; color: #718096; font-size: 1.05rem; pointer-events: none; user-select: none;">@kms-technology.com</span>
+                        </div>
                         <div id="emailError" class="input-error"></div>
                     </div>
                     <div class="form-group required-field">
@@ -1284,74 +1334,43 @@
                     <hr class="section-divider">
 
                     <!-- Group 3: Avatar Upload -->
-                    <div>
-                        <div style="margin-bottom: 16px; ">
-                            <label for="avatarTypeFile"
-                                style="font-weight:500;display:inline-flex;align-items:center;margin-bottom:10px; margin-right: 16px; cursor: pointer; padding: 8px 12px; border-radius: 8px; border: 2px solid #e0e4ea; background: #f7fafc; transition: all 0.2s ease;">
-                                <input type="radio" name="avatarType" id="avatarTypeFile" value="file" checked
-                                    style="margin-right:8px;" />
-                                Avatar by Upload
-                            </label>
-                            <label for="avatarTypeUrl"
-                                style="font-weight:500;display:inline-flex;align-items:center;margin-bottom:10px; cursor: pointer; padding: 8px 12px; border-radius: 8px; border: 2px solid #e0e4ea; background: #f7fafc; transition: all 0.2s ease;">
-                                <input type="radio" name="avatarType" id="avatarTypeUrl" value="url"
-                                    style="margin-right:8px;" />
-                                Avatar by URL
-                            </label>
 
-                        </div>
-                        <div id="avatarFileInput" style="display:none;">
-                            <div class="custom-file-upload">
-                                <div class="file-drop-zone" id="fileDropZone">
-                                    <div class="file-drop-content">
-                                        <div class="upload-icon">
-                                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M12 16L12 8M12 8L15 11M12 8L9 11" stroke="currentColor"
-                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path
-                                                    d="M3 15V16C3 18.8284 3 20.2426 3.87868 21.1213C4.75736 22 6.17157 22 9 22H15C17.8284 22 19.2426 22 20.1213 21.1213C21 20.2426 21 18.8284 21 16V15"
-                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
-                                            </svg>
-                                        </div>
-                                        <h3 class="upload-title">Upload avatar image (optional)</h3>
-                                        <p class="upload-subtitle">or click to browse</p>
-                                        <p class="upload-info">Supports: JPG, JPEG, PNG (Max 100kb)</p>
+                    <div id="avatarFileInput">
+
+                        <div class="custom-file-upload">
+                            <div class="file-drop-zone" id="fileDropZone">
+                                <div class="file-drop-content">
+                                    <div class="upload-icon">
+                                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M12 16L12 8M12 8L15 11M12 8L9 11" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path
+                                                d="M3 15V16C3 18.8284 3 20.2426 3.87868 21.1213C4.75736 22 6.17157 22 9 22H15C17.8284 22 19.2426 22 20.1213 21.1213C21 20.2426 21 18.8284 21 16V15"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                        </svg>
                                     </div>
-                                    <input type="file" name="avatarFile" id="avatarFile" accept=".jpg,.jpeg,.png"
-                                        class="hidden-input" />
+                                    <h3 class="upload-title">Upload avatar image </h3>
+                                    <p class="upload-subtitle">or click to browse</p>
+                                    <p class="upload-info">Supports: JPG, PNG (Max 100kb)</p>
                                 </div>
+                                <input type="file" name="avatarFile" id="avatarFile" accept=".jpg,.jpeg,.png"
+                                    class="hidden-input" />
                             </div>
-                            <div id="avatarFilePreview" class="file-preview" style="display:none;"></div>
-                            <textarea id="avatarBase64" readonly class="base64-textarea"
-                                style="display:none;"></textarea>
-                            <button type="button" id="copyBase64Btn" class="copy-base64-btn" style="display:none;">Copy
-                                Base64</button>
-                            <button type="button" id="removeAvatarFile" class="remove-avatar-btn" style="display:none;">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                                Remove avatar
-                            </button>
                         </div>
-                        <div id="avatarUrlInput">
-                            <div class="form-group">
-                                <input type="text" name="avatar" id="avatar" value="" placeholder=" " />
-                                <label for="avatar">Avatar image URL</label>
-                            </div>
-                            <button type="button" id="removeAvatarUrl" class="remove-avatar-btn" style="display:none;">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                                Remove avatar
-                            </button>
-                        </div>
-
+                        <div id="avatarFilePreview" class="file-preview" style="display:none;"></div>
+                        <textarea id="avatarBase64" readonly class="base64-textarea" style="display:none;"></textarea>
+                        <button type="button" id="copyBase64Btn" class="copy-base64-btn" style="display:none;">Copy
+                            Base64</button>
+                        <button type="button" id="removeAvatarFile" class="remove-avatar-btn" style="display:none;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            Remove avatar
+                        </button>
                     </div>
                 </form>
             </div>
@@ -1478,23 +1497,14 @@
         };
 
         const handleChange = () => {
-            let avatar = "";
-            const avatarType = document.querySelector('input[name="avatarType"]:checked').value;
-
-            if (avatarType === "url") {
-                // Use the URL from the input field
-                avatar = document.getElementById("avatar").value || "";
-            } else if (avatarType === "file") {
-                // Use the uploaded base64 image for file upload mode
-                avatar = window._uploadedImageBase64 || "";
-            }
-
+            let avatar = window._uploadedImageBase64 || "";
             const name = document.getElementById("name").value || "[add your name]";
             const title = document.getElementById("title").value || "[add your title]";
-            const email = document.getElementById("email").value || "[add your email]";
+            // Only get the username part and append the suffix
+            const emailInput = document.getElementById("email").value.trim();
+            const email = emailInput ? `${emailInput}@kms-technology.com` : "[add your email]";
             const mobile = document.getElementById("mobile").value || "[add your mobile number]";
             const addressId = document.querySelector('input[name="addressId"]:checked').value;
-
             const addr = ADDRESSES[addressId];
             const address = addr ? addr.address : "[select your office]";
             const map = addr ? addr.map : "N/A";
@@ -1502,36 +1512,6 @@
             const rootIframe = document.getElementById("idisplay");
             rootIframe.srcdoc = value.trim();
         };
-
-        // Avatar type toggle logic
-        document.querySelectorAll('input[name="avatarType"]').forEach((el) => {
-            el.addEventListener('change', function () {
-                // Update visual styling for selected state
-                document.querySelectorAll('label[for^="avatarType"]').forEach(label => {
-                    label.classList.remove('avatar-type-selected');
-                });
-                document.querySelector(`label[for="${this.id}"]`).classList.add('avatar-type-selected');
-
-                if (this.value === 'url') {
-                    document.getElementById('avatarUrlInput').style.display = '';
-                    document.getElementById('avatarFileInput').style.display = 'none';
-                    // Clear uploaded image when switching to URL mode
-                    window._uploadedImageBase64 = "";
-                    // Clear file preview
-                    preview.style.display = 'none';
-                    preview.innerHTML = '';
-                    // Reset file upload zone
-                    resetFileUpload();
-                } else {
-                    document.getElementById('avatarUrlInput').style.display = 'none';
-                    document.getElementById('avatarFileInput').style.display = '';
-                    // Clear URL input when switching to file mode
-                    document.getElementById('avatar').value = '';
-                }
-                handleChange();
-                updateRemoveButtonVisibility();
-            });
-        });
 
         // Enhanced file upload with drag and drop
         const fileDropZone = document.getElementById('fileDropZone');
@@ -1681,23 +1661,14 @@
 
         // Remove avatar functionality
         function removeAvatar() {
-            const avatarType = document.querySelector('input[name="avatarType"]:checked').value;
-
-            if (avatarType === 'url') {
-                // Clear URL input
-                document.getElementById('avatar').value = '';
-                // Hide remove button
-                document.getElementById('removeAvatarUrl').style.display = 'none';
-            } else if (avatarType === 'file') {
-                // Clear uploaded base64 image
-                window._uploadedImageBase64 = "";
-                // Reset file upload zone
-                resetFileUpload();
-                // Hide preview and remove button
-                preview.style.display = 'none';
-                preview.innerHTML = '';
-                document.getElementById('removeAvatarFile').style.display = 'none';
-            }
+            // Clear uploaded base64 image
+            window._uploadedImageBase64 = "";
+            // Reset file upload zone
+            resetFileUpload();
+            // Hide preview and remove button
+            preview.style.display = 'none';
+            preview.innerHTML = '';
+            document.getElementById('removeAvatarFile').style.display = 'none';
 
             // Update signature preview
             handleChange();
@@ -1705,17 +1676,9 @@
 
         // Show/hide remove buttons based on avatar presence
         function updateRemoveButtonVisibility() {
-            const avatarType = document.querySelector('input[name="avatarType"]:checked').value;
-
-            if (avatarType === 'url') {
-                const avatarUrl = document.getElementById('avatar').value.trim();
-                const removeBtn = document.getElementById('removeAvatarUrl');
-                removeBtn.style.display = avatarUrl ? 'flex' : 'none';
-            } else if (avatarType === 'file') {
-                const hasUploadedImage = window._uploadedImageBase64 && window._uploadedImageBase64.trim();
-                const removeBtn = document.getElementById('removeAvatarFile');
-                removeBtn.style.display = hasUploadedImage ? 'flex' : 'none';
-            }
+            const hasUploadedImage = window._uploadedImageBase64 && window._uploadedImageBase64.trim();
+            const removeBtn = document.getElementById('removeAvatarFile');
+            removeBtn.style.display = hasUploadedImage ? 'flex' : 'none';
         }
         document.getElementById('copyBase64Btn').addEventListener('click', function () {
             const base64Area = document.getElementById('avatarBase64');
@@ -1754,11 +1717,6 @@
         };
 
         // Enhanced form validation and UX
-        const validateEmail = (email) => {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(email);
-        };
-
         const validateMobile = (mobile) => {
             // Accepts +countrycode, (countrycode), or 0, then 7-14 digits with optional separators
             const re = /^(\+\d{1,3}|\(\+?\d{1,3}\)|0)[\s.-]?([\d\s.-]{7,14})$/;
@@ -1776,35 +1734,9 @@
             }
         };
 
-        const showEmailError = (show, message = '') => {
-            const errorDiv = document.getElementById('emailError');
-            if (show) {
-                errorDiv.textContent = message;
-                errorDiv.classList.add('show');
-            } else {
-                errorDiv.classList.remove('show');
-                setTimeout(() => { errorDiv.textContent = ''; }, 250);
-            }
-        };
-
         const validateField = (input) => {
             const value = input.value.trim();
             input.classList.remove('valid', 'invalid');
-
-            if (input.id === 'email') {
-                if (!value) {
-                    showEmailError(false);
-                    return;
-                }
-                if (validateEmail(value)) {
-                    input.classList.add('valid');
-                    showEmailError(false);
-                } else {
-                    input.classList.add('invalid');
-                    showEmailError(true, 'Please enter a valid email address. Example: john.doe@email.com');
-                }
-                return;
-            }
 
             if (input.id === 'mobile') {
                 if (!value) {
@@ -1843,16 +1775,11 @@
                 // Re-run handleChange to get the latest HTML
                 const name = document.getElementById("name").value || "[add your name]";
                 const title = document.getElementById("title").value || "[add your title]";
-                const email = document.getElementById("email").value || "[add your email]";
+                const emailInput = document.getElementById("email").value || "";
+                const email = emailInput ? `${emailInput}@kms-technology.com` : "[add your email]";
                 const mobile = document.getElementById("mobile").value || "[add your mobile number]";
                 const addressId = document.querySelector('input[name="addressId"]:checked').value;
-                let avatar = "";
-                const avatarType = document.querySelector('input[name="avatarType"]:checked').value;
-                if (avatarType === "url") {
-                    avatar = document.getElementById("avatar").value || "";
-                } else if (avatarType === "file") {
-                    avatar = window._uploadedImageBase64 || "";
-                }
+                let avatar = window._uploadedImageBase64 || "";
                 const addr = ADDRESSES[addressId];
                 const address = addr ? addr.address : "[select your office]";
                 const map = addr ? addr.map : "N/A";
@@ -1899,13 +1826,9 @@
         // Event listener registration
         document.addEventListener("DOMContentLoaded", () => {
             // Set file upload as default
-            document.getElementById('avatarTypeFile').checked = true;
-            document.getElementById('avatarUrlInput').style.display = 'none';
             document.getElementById('avatarFileInput').style.display = '';
-
-            // Set initial selected state for avatar type
-            document.querySelector('label[for="avatarTypeFile"]').classList.add('avatar-type-selected');
-
+            // Remove .fading class from iframe on load
+            document.getElementById('idisplay').classList.remove('fading');
             handleChange();
             updateRemoveButtonVisibility();
         });
@@ -1922,24 +1845,23 @@
             });
 
         // Remove avatar button event listeners
-        document.getElementById("removeAvatarUrl").addEventListener("click", removeAvatar);
         document.getElementById("removeAvatarFile").addEventListener("click", removeAvatar);
 
         // Avatar type focus handling for better UX
-        document.querySelectorAll('input[name="avatarType"]').forEach((el) => {
-            el.addEventListener('focus', function () {
-                document.querySelectorAll('label[for^="avatarType"]').forEach(label => {
-                    label.classList.remove('avatar-type-focus');
-                });
-                document.querySelector(`label[for="${this.id}"]`).classList.add('avatar-type-focus');
-            });
+        // document.querySelectorAll('input[name="avatarType"]').forEach((el) => { // Removed
+        //     el.addEventListener('focus', function () { // Removed
+        //         document.querySelectorAll('label[for^="avatarType"]').forEach(label => { // Removed
+        //             label.classList.remove('avatar-type-focus'); // Removed
+        //         }); // Removed
+        //         document.querySelector(`label[for="${this.id}"]`).classList.add('avatar-type-focus'); // Removed
+        //     }); // Removed
 
-            el.addEventListener('blur', function () {
-                document.querySelectorAll('label[for^="avatarType"]').forEach(label => {
-                    label.classList.remove('avatar-type-focus');
-                });
-            });
-        });
+        //     el.addEventListener('blur', function () { // Removed
+        //         document.querySelectorAll('label[for^="avatarType"]').forEach(label => { // Removed
+        //             label.classList.remove('avatar-type-focus'); // Removed
+        //         }); // Removed
+        //     }); // Removed
+        // }); // Removed
 
         document.getElementById("copyBtn").addEventListener("click", handleCopy);
 
@@ -1962,7 +1884,7 @@
 
         // Check for saved dark mode preference or default to light mode
         const isDarkMode = localStorage.getItem('darkMode') === 'true';
-        
+
         function setDarkMode(enabled) {
             if (enabled) {
                 document.body.classList.add('dark-mode');
