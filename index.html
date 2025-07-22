@@ -1305,7 +1305,7 @@
                         <div id="emailError" class="input-error"></div>
                     </div>
                     <div class="form-group required-field">
-                        <input type="text" name="mobile" id="mobile" value="(+84) " placeholder=" " />
+                        <input type="text" name="mobile" id="mobile" value="" placeholder=" " />
                         <label for="mobile">Mobile number</label>
                         <div id="mobileError" class="input-error"></div>
                     </div>
@@ -1336,7 +1336,6 @@
                     <!-- Group 3: Avatar Upload -->
 
                     <div id="avatarFileInput">
-
                         <div class="custom-file-upload">
                             <div class="file-drop-zone" id="fileDropZone">
                                 <div class="file-drop-content">
@@ -1351,7 +1350,7 @@
                                                 stroke-linejoin="round" />
                                         </svg>
                                     </div>
-                                    <h3 class="upload-title">Upload avatar image </h3>
+                                    <h3 class="upload-title">Upload avatar image (optional) </h3>
                                     <p class="upload-subtitle">or click to browse</p>
                                     <p class="upload-info">Supports: JPG, PNG (Max 100kb)</p>
                                 </div>
@@ -1748,7 +1747,7 @@
                     showMobileError(false);
                 } else {
                     input.classList.add('invalid');
-                    showMobileError(true, 'Please enter a valid phone number. Example: +1 555 123 4567 or +52 55 1234 5678');
+                    showMobileError(true, 'Please enter a valid phone number. Example: +1 555 123 4567, +84 909 123 456 or +52 55 1234 5678');
                 }
                 return;
             }
