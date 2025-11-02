@@ -1417,7 +1417,10 @@
         const INCON_LINKEDIN =
             "https://mcusercontent.com/62e4cc60e0bf7e4a8a1a3c2ae/images/4f5b1ecd-eb97-4f62-98bb-9e99503b6c1f.png";
 
-        const renderHTML = (name, title, email, mobile, address, map, avatar) => {
+        const renderHTML = (name, title, email, mobile, address, map, avatar, addressId) => {
+            // Hide Facebook icon for US and Mexico offices
+            const showFacebook = addressId && addressId !== 'us' && addressId !== 'mx';
+            
             return (
                 `
   <!DOCTYPE html>
@@ -1443,9 +1446,9 @@
                 <td style="text-align: center; padding: 0 4px;">
                     <a href="https://www.kms-technology.com/" target="_blank" rel="noopener noreferrer" class="contact-icon"><img src="${ICON_WEB}" alt="w" width="31" height="31"></a>
                 </td>
-                <td style="text-align: center; padding: 0 4px;">
+                ${showFacebook ? `<td style="text-align: center; padding: 0 4px;">
                     <a href="https://www.facebook.com/kmstechnologyvietnam" target="_blank" rel="noopener noreferrer" class="contact-icon" style="margin:0 6px"><img src="${ICON_FB}" alt="f" width="31" height="31"></a>
-                </td>
+                </td>` : ''}
                 <td style="text-align: center; padding: 0 4px;">
                     <a href="https://www.linkedin.com/company/kms-technology" target="_blank" rel="noopener noreferrer" class="contact-icon"><img src="${INCON_LINKEDIN}" alt="in" width="31" height="31"></a>
                 </td>
@@ -1507,7 +1510,7 @@
             const addr = ADDRESSES[addressId];
             const address = addr ? addr.address : "[select your office]";
             const map = addr ? addr.map : "N/A";
-            const value = renderHTML(name, title, email, mobile, address, map, avatar);
+            const value = renderHTML(name, title, email, mobile, address, map, avatar, addressId);
             const rootIframe = document.getElementById("idisplay");
             rootIframe.srcdoc = value.trim();
         };
@@ -1782,7 +1785,7 @@
                 const addr = ADDRESSES[addressId];
                 const address = addr ? addr.address : "[select your office]";
                 const map = addr ? addr.map : "N/A";
-                const value = renderHTML(name, title, email, mobile, address, map, avatar);
+                const value = renderHTML(name, title, email, mobile, address, map, avatar, addressId);
                 rootIframe.srcdoc = value.trim();
                 setTimeout(() => {
                     rootIframe.classList.remove('fading');
